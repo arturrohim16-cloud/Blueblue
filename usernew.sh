@@ -207,9 +207,9 @@ echo -e "SSH-SSL-WS : $wsssl" | tee -a /etc/log-create-user.log
 echo -e "SSL/TLS : $ssl" | tee -a /etc/log-create-user.log
 echo -e "UDPGW : 7100-7300" | tee -a /etc/log-create-user.log
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
-echo -e "UDP Custom : $IP:1-65535@$Login:$Pass" | tee -a /etc/log-create-user.log
-echo -e "SSH-SSL-WS : $IP:443@$Login:$Pass" | tee -a /etc/log-create-user.log
-echo -e "SSH-WS     : $IP:80@$Login:$Pass" | tee -a /etc/log-create-user.log
+echo -e "UDP Custom : $domen:1-65535@$Login:$Pass" | tee -a /etc/log-create-user.log
+echo -e "SSH-SSL-WS : $domen:443@$Login:$Pass" | tee -a /etc/log-create-user.log
+echo -e "SSH-WS     : $domen:80@$Login:$Pass" | tee -a /etc/log-create-user.log
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
 echo -e "Link SSH Config : http://${domain}:81/ssh-$Login.txt" | tee -a /etc/log-create-user.log
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
@@ -232,5 +232,40 @@ GET wss://bug.com/ [protocol][crlf]Host: $domen[crlf]Connection: Keep-Alive[crlf
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
 fi
 echo "" | tee -a /etc/log-create-user.log
+# --- GENERATE PESAN SSH ---
+MSG_SSH="✨ <b>SSH PREMIUM SULTAN EDITION</b> ✨
+━━━━━━━━━━━━━━━━━━━━━━
+👤 <b>Username :</b> <code>$Login</code>
+🔑 <b>Password :</b> <code>$pass</code>
+📅 <b>Expired  :</b> <code>$exp</code>
+━━━━━━━━━━━━━━━━━━━━━━
+🌐 <b>Host/IP  :</b> <code>$domen</code>
+🔓 <b>OpenSSH  :</b> 22
+🐻 <b>Dropbear :</b> 143
+🔐 <b>Stunnel  :</b> 443
+🔌 <b>WS HTTP  :</b> 80
+🚀 <b>All Port :</b> 1-65535
+━━━━━━━━━━━━━━━━━━━━━━
+📝 <b>Payload Websocket :</b>
+<code>GET / [protocol][crlf]Host: [host][crlf]Connection: Keep-Alive[crlf]Connection: Upgrade[crlf]Upgrade: websocket[crlf][crlf]</code>
+📝 <b>Payload http :</b>
+<code>GET wss://bug.com/ [protocol][crlf]Host: $domen[crlf]Connection: Keep-Alive[crlf]Connection: Upgrade[crlf]Upgrade: websocket[crlf][crlf]
+━━━━━━━━━━━━━━━━━━━━━━
+🔗 <b>Format Login (Copy-able) :</b>
+🔹 <b>SSH-SSL-WS :</b> <code>$domen:443@$Login:$pass</code>
+🔹 <b>SSH-WS :</b> <code>$domen:80@$Login:$pass</code>
+🔹 <b>UDP Custom :</b> <code>$domen:1-65535@$Login:$pass</code>
+━━━━━━━━━━━━━━━━━━━━━━
+✅ <b>Script By AJI VPN</b>"
+
+# --- FUNGSI KIRIM LOG KE BOT ---
+if [ -f "/etc/xray/bot.conf" ]; then
+    source /etc/xray/bot.conf
+    curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
+        -d chat_id="${CHAT_ID}" \
+        -d text="${MSG_SSH}" \
+        -d parse_mode="HTML" > /dev/null
+fi
+
 read -n 1 -s -r -p "Press any key to back on menu"
 menu
