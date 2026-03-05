@@ -106,16 +106,7 @@ echo -e "$Pass\n$Pass\n"|passwd $Login &> /dev/null
 PID=`ps -ef |grep -v grep | grep sshws |awk '{print $2}'`
 cat > /home/vps/public_html/ssh-$Login.txt <<-END
 ====================================================================
-             P R O J E C T  O F  N E V E R M O R E S S H
-                       [Freedom Internet]
-====================================================================
-            https://github.com/NevermoreSSH
-====================================================================
-              Format SSH OVPN Account
-====================================================================
-
-====================================================================
-        SSH Account       
+                            🚀SSH PREMIUM🚀       
 ====================================================================
 Username : $Login
 Password : $Pass
@@ -134,7 +125,9 @@ UDP Custom : $domen:1-65535@$Login:$Pass
 SSH-SSL-WS : $domen:443@$Login:$Pass
 SSH-WS     : $domen:80@$Login:$Pass
 ====================================================================
-Payload WSS: GET wss://BUG.COM/ HTTP/1.1[crlf]Host: $domain[crlf]Upgrade: websocket[crlf][crlf] 
+GET wss://BUG.COM/ HTTP/1.1[crlf]Host: $domain[crlf]Upgrade: websocket[crlf][crlf]
+
+GET / [protocol][crlf]Host: [host][crlf]Connection: Keep-Alive[crlf]Connection: Upgrade[crlf]Upgrade: websocket[crlf][crlf]
 ====================================================================
 
 END
