@@ -131,9 +131,9 @@ SSH-SSL-WS : $wsssl
 SSL/TLS : $ssl
 UDPGW : 7100-7300
 ====================================================================
-UDP Custom : $IP:1-65535@$Login:$Pass
-SSH-SSL-WS : $IP:443@$Login:$Pass
-SSH-WS     : $IP:80@$Login:$Pass
+UDP Custom : $domen:1-65535@$Login:$Pass
+SSH-SSL-WS : $domen:443@$Login:$Pass
+SSH-WS     : $domen:80@$Login:$Pass
 ====================================================================
 Payload WSS: GET wss://BUG.COM/ HTTP/1.1[crlf]Host: $domain[crlf]Upgrade: websocket[crlf][crlf] 
 ====================================================================
@@ -161,9 +161,9 @@ echo -e "SSH-SSL-WS : $wsssl" | tee -a /etc/log-create-user.log
 echo -e "SSL/TLS : $ssl" | tee -a /etc/log-create-user.log
 echo -e "UDPGW : 7100-7300" | tee -a /etc/log-create-user.log
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
-echo -e "UDP Custom : $IP:1-65535@$Login:$Pass" | tee -a /etc/log-create-user.log
-echo -e "SSH-SSL-WS : $IP:443@$Login:$Pass" | tee -a /etc/log-create-user.log
-echo -e "SSH-WS     : $IP:80@$Login:$Pass" | tee -a /etc/log-create-user.log
+echo -e "UDP Custom : $domen:1-65535@$Login:$Pass" | tee -a /etc/log-create-user.log
+echo -e "SSH-SSL-WS : $domen:443@$Login:$Pass" | tee -a /etc/log-create-user.log
+echo -e "SSH-WS     : $domen:80@$Login:$Pass" | tee -a /etc/log-create-user.log
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
 echo -e "Link SSH Config : http://${domain}:81/ssh-$Login.txt" | tee -a /etc/log-create-user.log
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
