@@ -138,7 +138,6 @@ Payload WSS: GET wss://BUG.COM/ HTTP/1.1[crlf]Host: $domain[crlf]Upgrade: websoc
 ====================================================================
 
 END
-send_log
 if [[ ! -z "${PID}" ]]; then
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
 echo -e "\E[0;41;36m            SSH Account            \E[0m" | tee -a /etc/log-create-user.log
