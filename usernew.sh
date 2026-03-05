@@ -106,8 +106,6 @@ echo -e "$Pass\n$Pass\n"|passwd $Login &> /dev/null
 PID=`ps -ef |grep -v grep | grep sshws |awk '{print $2}'`
 
 cat > /home/vps/public_html/ssh-$Login.txt <<-END
-# // Fungsi Kirim Log ke Telegram
-send_log() {
     TEXT="
 <code>===========================</code>
       🚀<b>SSH PREMIUM</b>🚀       
@@ -137,7 +135,6 @@ send_log() {
 <code>$domen:80@$Login:$Pass</code>
 ━━━━━━━━━━━━━━━━━━━━━━
 ✅ <b>Script By AJI VPN</b>"
-}
 
 END
 
