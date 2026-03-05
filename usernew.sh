@@ -111,7 +111,7 @@ msg="🚀 <b>SSH ACCOUNT CREATED</b> 🚀
 👤 <b>User:</b> <code>$Login</code>
 🔑 <b>Pass:</b> <code>$Pass</code>
 📅 <b>Exp:</b> <code>$exp</code>
-━━━━━━━━━━━━━━━━━━━━━"
+━━━━━━━━━━━━━━━━━━━━━
 🌐 <b>Host/IP :</b> <code>$domen</code>
 🔓 <b>OpenSSH :</b> <code>22</code>
 🐻 <b>Dropbear :</b> <code>109, 143</code>
