@@ -225,26 +225,26 @@ vmesslink4="vmess://$(echo $aso | base64 -w 0)"
 vmesslink5="vmess://$(echo $grpc | base64 -w 0)"
 vmesslink6="vmess://$(echo $ama | base64 -w 0)"
 vmesslink7="vmess://$(echo $ami | base64 -w 0)"
-cat > /home/vps/public_html/vmess-$user.txt <<-END
-====================================================================
-             P R O J E C T  O F  N E V E R M O R E S S H
-                       [Freedom Internet]
-====================================================================
-        https://github.com/NevermoreSSH/Blueblue
-====================================================================
-              Format Vmess WS/GRPC - BBv2
-====================================================================
 
-_______________________________________________________
-              Link Vmess Account
-_______________________________________________________
-Link TLS : vmess://$(echo $asu | base64 -w 0)
-_______________________________________________________
-Link none TLS : vmess://$(echo $ask | base64 -w 0)
-_______________________________________________________
-Link GRPC : vmess://$(echo $grpc | base64 -w 0)
-_______________________________________________________
-Expired On : $exp
+VMESS_LOG="╔════════════════════╗
+      ✨ VMESS PREMIUM ✨
+╚════════════════════╝
+👤 **User** : \`$user\`
+📅 **Expired** : \`$exp\`
+━━━━━━━━━━━━━━━━━━━━━━
+🌐 **Link TLS** :
+/`$vmesslink1/`
+
+🌐 **Link Non-TLS** :
+/`$vmesslink2/`
+
+🔗 **Link gRPC** :
+/`$vmesslink3/`
+━━━━━━━━━━━━━━━━━━━━━━
+✅ *Auto-Script By AJI VPN*"
+
+send_log "VMESS"
+
 
 END
 systemctl restart xray > /dev/null 2>&1
