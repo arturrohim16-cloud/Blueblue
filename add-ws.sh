@@ -230,17 +230,18 @@ source /usr/bin/bot.sh
 VMESS_MSG="╔════════════════════╗
       ✨ VMESS PREMIUM ✨
 ╚════════════════════╝
-👤 **User** : \`$user\`
-📅 **Expired** : \`$exp\`
+👤 <b>User :</b> <code>$user</code>
+📅 <b>Expired :</b> <code>$exp</code>
+🌐 <b>Domain :</b> <code>$domain</code>
 ━━━━━━━━━━━━━━━━━━━━━━
-🌐 **Link TLS** :
-\`$vmesslink1\`
+🌐 <b>Link TLS :</b>
+<code>$vmesslink1</code>
 
-🌐 **Link Non-TLS** :
-\`$vmesslink2\`
+🌐 <b>Link Non-TLS :</b>
+<code>$vmesslink2</code>
 
-🔗 **Link gRPC** :
-\`$vmesslink3\`
+🔗 <b>Link gRPC :</b>
+<code>$vmesslink3</code>
 ━━━━━━━━━━━━━━━━━━━━━━
 ✅ *Auto-Script By AJI VPN*"
 
