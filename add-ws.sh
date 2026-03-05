@@ -227,7 +227,7 @@ vmesslink6="vmess://$(echo $ama | base64 -w 0)"
 vmesslink7="vmess://$(echo $ami | base64 -w 0)"
 
 source /usr/bin/bot.sh
-VMESS_LOG="╔════════════════════╗
+VMESS_MSG="╔════════════════════╗
       ✨ VMESS PREMIUM ✨
 ╚════════════════════╝
 👤 **User** : \`$user\`
@@ -244,7 +244,7 @@ VMESS_LOG="╔════════════════════╗
 ━━━━━━━━━━━━━━━━━━━━━━
 ✅ *Auto-Script By AJI VPN*"
 
-send_log "$VMESS_LOG"
+send_log "$VMESS_MSG"
 
 END
 systemctl restart xray > /dev/null 2>&1
