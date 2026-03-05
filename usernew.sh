@@ -109,27 +109,29 @@ cat > /home/vps/public_html/ssh-$Login.txt <<-END
 ===========================
       🚀SSH PREMIUM🚀       
 ===========================
-Username : $Login
-Password : $Pass
-Expired On : $exp
 ━━━━━━━━━━━━━━━━━━━━━━
-IP Address : $IP
-Host : $domen
-OpenSSH : $opensh
-Dropbear : $db
-SSH-WS : $portsshws
-SSH-SSL-WS : $wsssl
-SSL/TLS : $ssl
-UDPGW : 7100-7300
-━━━━━━━━━━━━━━━━━━━━━━━
-UDP Custom : $domen:1-65535@$Login:$Pass
-SSH-SSL-WS : $domen:443@$Login:$Pass
-SSH-WS     : $domen:80@$Login:$Pass
-============================
-GET wss://BUG.COM/ HTTP/1.1[crlf]Host: $domain[crlf]Upgrade: websocket[crlf][crlf]
+👤 <b>Username :</b> <code>$Login</code>
+🔑 <b>Password :</b> <code>$pass</code>
+📅 <b>Expired On :</b> <code>$exp</code>
+━━━━━━━━━━━━━━━━━━━━━━
+🌐 <b>Host/IP  :</b> <code>$domen</code>
+🔓 <b>OpenSSH : $opensh
+🐻 <b>Dropbear : $db
+🔐 <b>SSH-WS : $portsshws
+🔌 <b>SSH-SSL-WS : $wsssl
+🚀 <b>SSL/TLS : $ssl
+🚀 <b>UDPGW : 7100-7300
+━━━━━━━━━━━━━━━━━━━━━━
+📝 <b>Payload Websocket :</b>
+<code>GET / [protocol][crlf]Host: [host][crlf]Connection: Keep-Alive[crlf]Connection: Upgrade[crlf]Upgrade: websocket[crlf][crlf]</code>
+━━━━━━━━━━━━━━━━━━━━━━
+🔗 <b>Format Login (Copy-able) :</b>
+🔹 <b>UDP Custom :</b> <code>$domen:1-65535@$Login:$Pass</code>
+🔹 <b>SSH-SSL-WS :</b> <code>$domen:443@$Login:$Pass</code>
+🔹 <b>SSH-WS :</b> <code>$domen:80@$Login:$Pass</code>
+━━━━━━━━━━━━━━━━━━━━━━
+✅ <b>Script By AJI VPN</b>"
 
-GET / [protocol][crlf]Host: [host][crlf]Connection: Keep-Alive[crlf]Connection: Upgrade[crlf]Upgrade: websocket[crlf][crlf]
-============================
 END
 
 if [[ ! -z "${PID}" ]]; then
