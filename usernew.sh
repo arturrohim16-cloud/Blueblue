@@ -42,6 +42,9 @@ export BOLD="\e[1m"
 export WARNING="${RED}\e[5m"
 export UNDERLINE="\e[4m"
 
+# // Bot Telegram Information # Sesuai data yang Mas berikan
+export KEY="8226263150:AAFdiVuQeEs hxOpSvema_F6fDwbyFcfNWnw" export CHATID="6577966386"
+
 # // Exporting URL Host
 export Server_URL="raw.githubusercontent.com/NevermoreSSH/Blueblue/main/test"
 export Server1_URL="raw.githubusercontent.com/NevermoreSSH/Blueblue/main/limit"
