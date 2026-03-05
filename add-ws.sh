@@ -244,8 +244,7 @@ VMESS_LOG="╔════════════════════╗
 ━━━━━━━━━━━━━━━━━━━━━━
 ✅ *Auto-Script By AJI VPN*"
 
-send_log "$VMESS"
-
+send_log "VMESS" "$VMESS_LOG"
 
 END
 systemctl restart xray > /dev/null 2>&1
