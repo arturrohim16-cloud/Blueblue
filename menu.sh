@@ -237,7 +237,7 @@ case $opt in
 7) clear ; autoreboot ;;
 8) clear ; reboot ;;
 9) clear ; restart ;;
-10) clear ; menu-bckp ;;
+10) clear ; menu-bekap ;;
 11) clear ; addhost ;;
 12) clear ; genssl ;;
 13) clear ; nano /etc/issue.net ;;
