@@ -105,13 +105,13 @@ exp="$(chage -l $Login | grep "Account expires" | awk -F": " '{print $2}')"
 echo -e "$Pass\n$Pass\n"|passwd $Login &> /dev/null
 PID=`ps -ef |grep -v grep | grep sshws |awk '{print $2}'`
 cat > /home/vps/public_html/ssh-$Login.txt <<-END
-====================================================================
+==========================================================
                             🚀SSH PREMIUM🚀       
-====================================================================
+==========================================================
 Username : $Login
 Password : $Pass
 Expired On : $exp
-====================================================================
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 IP Address : $IP
 Host : $domen
 OpenSSH : $opensh
@@ -120,15 +120,15 @@ SSH-WS : $portsshws
 SSH-SSL-WS : $wsssl
 SSL/TLS : $ssl
 UDPGW : 7100-7300
-====================================================================
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 UDP Custom : $domen:1-65535@$Login:$Pass
 SSH-SSL-WS : $domen:443@$Login:$Pass
 SSH-WS     : $domen:80@$Login:$Pass
-====================================================================
+==========================================================
 GET wss://BUG.COM/ HTTP/1.1[crlf]Host: $domain[crlf]Upgrade: websocket[crlf][crlf]
 
 GET / [protocol][crlf]Host: [host][crlf]Connection: Keep-Alive[crlf]Connection: Upgrade[crlf]Upgrade: websocket[crlf][crlf]
-====================================================================
+==========================================================
 
 END
 if [[ ! -z "${PID}" ]]; then
