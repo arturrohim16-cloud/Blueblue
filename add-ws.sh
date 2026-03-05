@@ -225,6 +225,7 @@ vmesslink4="vmess://$(echo $aso | base64 -w 0)"
 vmesslink5="vmess://$(echo $grpc | base64 -w 0)"
 vmesslink6="vmess://$(echo $ama | base64 -w 0)"
 vmesslink7="vmess://$(echo $ami | base64 -w 0)"
+
 source /usr/bin/bot.sh
 VMESS_LOG="╔════════════════════╗
       ✨ VMESS PREMIUM ✨
@@ -233,13 +234,13 @@ VMESS_LOG="╔════════════════════╗
 📅 **Expired** : \`$exp\`
 ━━━━━━━━━━━━━━━━━━━━━━
 🌐 **Link TLS** :
-/`$vmesslink1/`
+\`$vmesslink1\`
 
 🌐 **Link Non-TLS** :
-/`$vmesslink2/`
+\`$vmesslink2\`
 
 🔗 **Link gRPC** :
-/`$vmesslink3/`
+\`$vmesslink3\`
 ━━━━━━━━━━━━━━━━━━━━━━
 ✅ *Auto-Script By AJI VPN*"
 
