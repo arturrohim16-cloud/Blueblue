@@ -1,5 +1,3 @@
-Domain1 vpnmurah.biz.me
-Domain2 vpnmurah.me
-Domain3 autoscript.ninja
+Domain1 aji.izz-store.my.id
 
-Jumlah 3
+Jumlah 1
