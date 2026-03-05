@@ -105,36 +105,15 @@ exp="$(chage -l $Login | grep "Account expires" | awk -F": " '{print $2}')"
 echo -e "$Pass\n$Pass\n"|passwd $Login &> /dev/null
 PID=`ps -ef |grep -v grep | grep sshws |awk '{print $2}'`
 
-cat > /home/vps/public_html/ssh-$Login.txt <<-END
-    TEXT="
-<code>===========================</code>
-      🚀<b>SSH PREMIUM</b>🚀       
-<code>===========================</code>
-━━━━━━━━━━━━━━━━━━━━━━
-👤 <b>Username :</b> <code>$Login</code>
-🔑 <b>Password :</b> <code>$Pass</code>
-📅 <b>Expired On :</b> <code>$exp</code>
-━━━━━━━━━━━━━━━━━━━━━━
-🌐 <b>Host/IP :</b> <code>$domen</code>
-🔓 <b>OpenSSH :</b> <code>22</code>
-🐻 <b>Dropbear :</b> <code>109, 143</code>
-🔐 <b>SSH-WS :</b> <code>80</code>
-🔌 <b>SSH-SSL-WS :</b> <code>443</code>
-🚀 <b>SSL/TLS :</b> <code>447, 777</code>
-🚀 <b>UDPGW :</b> <code>7100-7300</code>
-━━━━━━━━━━━━━━━━━━━━━━
-📝 <b>Payload Websocket :</b>
-<code>GET / [protocol][crlf]Host: [host][crlf]Connection: Keep-Alive[crlf]Connection: Upgrade[crlf]Upgrade: websocket[crlf][crlf]</code>
-━━━━━━━━━━━━━━━━━━━━━━
-🔗 <b>Format Login (Klik untuk Salin) :</b>
-🔹 <b>UDP Custom :</b> 
-<code>$domen:1-65535@$Login:$Pass</code>
-🔹 <b>SSH-SSL-WS :</b> 
-<code>$domen:443@$Login:$Pass</code>
-🔹 <b>SSH-WS :</b> 
-<code>$domen:80@$Login:$Pass</code>
-━━━━━━━━━━━━━━━━━━━━━━
-✅ <b>Script By AJI VPN</b>"
+source /usr/bin/bot.sh
+msg="🚀 <b>SSH ACCOUNT CREATED</b> 🚀
+━━━━━━━━━━━━━━━━━━━━━
+👤 <b>User:</b> <code>$Login</code>
+🔑 <b>Pass:</b> <code>$Pass</code>
+📅 <b>Exp:</b> <code>$exp</code>
+━━━━━━━━━━━━━━━━━━━━━"
+
+send_log "$msg"
 
 END
 
@@ -222,13 +201,5 @@ GET wss://bug.com/ [protocol][crlf]Host: $domen[crlf]Connection: Keep-Alive[crlf
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
 fi
 echo "" | tee -a /etc/log-create-user.log
-# Cara otomatis kirim isi file teks hasil create ke Telegram
-TOKEN="8226263150:AAFdiVuQeEshxOpSvema_F6fDwbyFcfNWnw"
-CHAT_ID="6577966386"
-HASIL_LOG="/home/vps/public_html/ssh-$Login.txt"
-curl -s -X POST "https://api.telegram.org/bot$KEY/sendMessage" \
-        -d chat_id="$CHATID" \
-        -d text="$TEXT" \
-        -d parse_mode="HTML" > /dev/null
 read -n 1 -s -r -p "Press any key to back on menu"
 menu
