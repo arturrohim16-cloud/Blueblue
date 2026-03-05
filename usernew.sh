@@ -261,10 +261,10 @@ MSG_SSH="✨ <b>SSH PREMIUM SULTAN EDITION</b> ✨
 # --- FUNGSI KIRIM LOG KE BOT ---
 if [ -f "/etc/xray/bot.conf" ]; then
     source /etc/xray/bot.conf
-    curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
-        -d chat_id="${CHAT_ID}" \
-        -d text="${MSG_SSH}" \
-        -d parse_mode="HTML" > /dev/null
+    curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
+        --data-urlencode "chat_id=$CHAT_ID" \
+        --data-urlencode "text=$TEXT" \
+        --data-urlencode "parse_mode=Markdown" > /dev/null
 fi
 
 read -n 1 -s -r -p "Press any key to back on menu"
