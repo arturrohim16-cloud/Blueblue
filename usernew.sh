@@ -105,6 +105,37 @@ exp="$(chage -l $Login | grep "Account expires" | awk -F": " '{print $2}')"
 echo -e "$Pass\n$Pass\n"|passwd $Login &> /dev/null
 PID=`ps -ef |grep -v grep | grep sshws |awk '{print $2}'`
 
+# // Send Log To Telegram Function
+send_log() {
+    TEXT="
+🚀 <b>SSH ACCOUNT CREATED</b> 🚀
+━━━━━━━━━━━━━━━━━━━━━
+<b>Username:</b> <code>$Login</code>
+<b>Password:</b> <code>$Pass</code>
+<b>Expired:</b> <code>$exp</code>
+━━━━━━━━━━━━━━━━━━━━━
+<b>Host:</b> <code>$domen</code>
+<b>IP:</b> <code>$IP</code>
+<b>OpenSSH:</b> $opensh
+<b>Dropbear:</b> $db
+<b>SSH-WS:</b> $portsshws
+<b>SSH-SSL:</b> $wsssl
+<b>UDPGW:</b> 7100-7300
+━━━━━━━━━━━━━━━━━━━━━
+<b>UDP Custom:</b>
+<code>$IP:1-65535@$Login:$Pass</code>
+<b>SSH-SSL-WS:</b>
+<code>$IP:443@$Login:$Pass</code>
+<b>SSH-WS:</b>
+<code>$IP:80@$Login:$Pass</code>
+━━━━━━━━━━━━━━━━━━━━━
+"
+    curl -s -X POST "https://api.telegram.org/bot$KEY/sendMessage" \
+        -d chat_id="$CHATID" \
+        -d text="$TEXT" \
+        -d parse_mode="HTML" > /dev/null
+}
+
 cat > /home/vps/public_html/ssh-$Login.txt <<-END
 ====================================================================
              P R O J E C T  O F  N E V E R M O R E S S H
@@ -232,40 +263,5 @@ GET wss://bug.com/ [protocol][crlf]Host: $domen[crlf]Connection: Keep-Alive[crlf
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
 fi
 echo "" | tee -a /etc/log-create-user.log
-# --- GENERATE PESAN SSH ---
-MSG_SSH="✨ <b>SSH PREMIUM SULTAN EDITION</b> ✨
-━━━━━━━━━━━━━━━━━━━━━━
-👤 <b>Username :</b> <code>$Login</code>
-🔑 <b>Password :</b> <code>$pass</code>
-📅 <b>Expired  :</b> <code>$exp</code>
-━━━━━━━━━━━━━━━━━━━━━━
-🌐 <b>Host/IP  :</b> <code>$domen</code>
-🔓 <b>OpenSSH  :</b> 22
-🐻 <b>Dropbear :</b> 143
-🔐 <b>Stunnel  :</b> 443
-🔌 <b>WS HTTP  :</b> 80
-🚀 <b>All Port :</b> 1-65535
-━━━━━━━━━━━━━━━━━━━━━━
-📝 <b>Payload Websocket :</b>
-<code>GET / [protocol][crlf]Host: [host][crlf]Connection: Keep-Alive[crlf]Connection: Upgrade[crlf]Upgrade: websocket[crlf][crlf]</code>
-📝 <b>Payload http :</b>
-<code>GET wss://bug.com/ [protocol][crlf]Host: $domen[crlf]Connection: Keep-Alive[crlf]Connection: Upgrade[crlf]Upgrade: websocket[crlf][crlf]
-━━━━━━━━━━━━━━━━━━━━━━
-🔗 <b>Format Login (Copy-able) :</b>
-🔹 <b>SSH-SSL-WS :</b> <code>$domen:443@$Login:$pass</code>
-🔹 <b>SSH-WS :</b> <code>$domen:80@$Login:$pass</code>
-🔹 <b>UDP Custom :</b> <code>$domen:1-65535@$Login:$pass</code>
-━━━━━━━━━━━━━━━━━━━━━━
-✅ <b>Script By AJI VPN</b>"
-
-# --- FUNGSI KIRIM LOG KE BOT ---
-if [ -f "/etc/xray/bot.conf" ]; then
-    source /etc/xray/bot.conf
-    curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
-        --data-urlencode "chat_id=$CHAT_ID" \
-        --data-urlencode "text=$TEXT" \
-        --data-urlencode "parse_mode=Markdown" > /dev/null
-fi
-
 read -n 1 -s -r -p "Press any key to back on menu"
 menu
