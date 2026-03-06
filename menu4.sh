@@ -222,8 +222,7 @@ echo -e "${BICyan} │  ${BICyan}Total Bandwidth :  ${BIWhite}$monthly_usage ${N
 echo -e "${BICyan} └────────────────────────────────────────────────────────────┘${NC}"
 echo -e "          ${BICyan} SSH ${NC}: $ressh""   ${BICyan} NGINX ${NC}: $resngx""    ${BICyan}  XRAY ${NC}: $resv2r"" ${BICyan} TROJAN ${NC}: $resv2r"
 echo -e "     ${BICyan} DROPBEAR ${NC}: $resdbr" "${BICyan} SSH-WS ${NC}: $ressshws" ${BICyan} Stunnel ${NC}: $sshstunel" "${BICyan}
-echo -e "${BICyan} ╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮${NC}"
-echo -e "  ${BICyan}SSH & VPN MENU${NC}                     ${BICyan}SYSTEM SETTINGS${NC}"
+echo -e "${BICyan}  ╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮${NC}"
 echo -e "  ${BICyan}[${BIWhite}01${BICyan}] SSHWS       ${WB}[${GB}${ssh}${WB}]${NC}      │  ${BICyan}[${BIWhite}06${BICyan}] EXP FILES${NC}" 
 echo -e "  ${BICyan}[${BIWhite}02${BICyan}] VMESS       ${WB}[${GB}${vmess}${WB}]${NC}      │  ${BICyan}[${BIWhite}07${BICyan}] AUTO REBOOT${NC}"    
 echo -e "  ${BICyan}[${BIWhite}03${BICyan}] VLESS       ${WB}[${GB}${vless}${WB}]${NC}      │  ${BICyan}[${BIWhite}08${BICyan}] REBOOT${NC}"    
