@@ -254,6 +254,6 @@ case $opt in
 22) clear ; wget https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/cf.sh && chmod +x cf.sh && ./cf.sh ;;
 
 0) clear ; menu ;;
-x) menu1 ;;
+x) menu4 ;;
 *) echo -e "" ; echo "Press any key to back exit" ; sleep 1 ; exit ;;
 esac
