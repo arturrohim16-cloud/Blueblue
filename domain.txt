@@ -1,3 +1,2 @@
-Domain1 aji.izz-store.my.id
+aji.izz-store.my.id
 
-Jumlah 1
