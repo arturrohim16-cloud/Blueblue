@@ -289,14 +289,6 @@ echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━�
 echo "" | tee -a /etc/log-create-user.log
 rm /etc/xray/$user-tls.json > /dev/null 2>&1
 rm /etc/xray/$user-none.json > /dev/null 2>&1
-# Cara otomatis kirim isi file teks hasil create ke Telegram
-TOKEN="8226263150:AAFdiVuQeEshxOpSvema_F6fDwbyFcfNWnw"
-CHAT_ID="6577966386"
-HASIL_LOG="/home/vps/public_html/ssh-$Login.txt"
-curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
-    -d chat_id="$CHAT_ID" \
-    -d text="$(cat $HASIL_LOG)" > /dev/null
-
 read -n 1 -s -r -p "Press any key to back on menu"
 
 menu
