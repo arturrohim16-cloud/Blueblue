@@ -100,29 +100,32 @@ sed -i '/#vless$/a\#vls '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
 sed -i '/#vlessgrpc$/a\#vlsg '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
-vlesslink1="vless://${uuid}@${domain}:443?type=ws&encryption=none&security=tls&host=${domain}&path=/vless&allowInsecure=1&sni=${domain}#XRAY_VLESS_TLS_${user}"
-vlesslink2="vless://${uuid}@${domain}:80?type=ws&encryption=none&security=none&host=${domain}&path=/vless#XRAY_VLESS_NTLS_${user}"
-vlesslink3="vless://${uuid}@${domain}:$tls?mode=gun&security=tls&encryption=none&type=grpc&serviceName=vless-grpc&sni=${domain}#VLESS_GRPC_${user}"
+# --- BAGIAN 1: BUAT LINK (WAJIB PAKAI KUTIP DUA) ---
+vlesslink1="vless://${uuid}@${domain}:443?path=/vless&security=tls&encryption=none&type=ws#${user}"
+vlesslink2="vless://${uuid}@${domain}:80?path=/vless&encryption=none&type=ws#${user}"
+vlesslink3="vless://${uuid}@${domain}:443?security=tls&encryption=none&type=grpc&serviceName=vless-grpc&sni=${domain}#${user}"
 
-source /usr/bin/bot.sh
-VLESS_MSG="╔════════════════════╗
-      ✨ VLESS PREMIUM ✨
+# --- BAGIAN 2: SUSUN PESAN ---
+VLESS_MSG="
+╔════════════════════╗
+    ✨ VLESS PREMIUM ✨
 ╚════════════════════╝
-👤 <b>User :</b> <code>$user</code>
-📅 <b>Expired :</b> <code>$exp</code>
-🌐 <b>Domain :</b> <code>$domain</code>
+👤 User : $user
+📅 Expired : $exp
+🌐 Domain : $domain
 ━━━━━━━━━━━━━━━━━━━━━━
-🌐 <b>Link TLS :</b>
-<code>${vlesslink1}" | tee -a /etc/log-create-user.log</code>
+🌐 Link TLS :
+<code>${vlesslink1}</code>
 
-🌐 <b>Link Non-TLS :</b>
-<code>${vlesslink2}" | tee -a /etc/log-create-user.log</code>
+🌐 Link Non-TLS :
+<code>${vlesslink2}</code>
 
-🔗 <b>Link gRPC :</b>
-<code>${vlesslink3}" | tee -a /etc/log-create-user.log</code>
+🔗 Link gRPC :
+<code>${vlesslink3}</code>
 ━━━━━━━━━━━━━━━━━━━━━━
 ✅ *Auto-Script By AJI VPN*"
 
+# --- BAGIAN 3: KIRIM ---
 send_log "$VLESS_MSG"
 
 systemctl restart xray
