@@ -206,8 +206,8 @@ cores=$(awk -F: '/model name/ {core++} END {print core}' /proc/cpuinfo)
 freq=$(awk -F: ' /cpu MHz/ {freq=$2} END {print freq}' /proc/cpuinfo)
 clear
 echo -e "${BICyan} ┌────────────────────────────────────────────────────────────┐${NC}"
-echo -e "${BICyan} │                  ${BIWhite}${UWhite}Server Informations${NC}"         
-echo -e "${BICyan} │"                                                                      
+echo -e "${BICyan} │"                  ${BIWhite}${UWhite}Server Informations${NC}"         
+echo -e "${BICyan} │                                                                      
 echo -e "${BICyan} │  ${BICyan}OS Linux        :  "$(hostnamectl | grep "Operating System" | cut -d ' ' -f5-)  
 echo -e "${BICyan} │  ${BICyan}Kernel          :  ${BICyan}$(uname -r)${NC}"  
 echo -e "${BICyan} │  ${BICyan}CPU Name        :  ${BIWhite}$cname${NC}"
@@ -242,7 +242,8 @@ echo -e "  ${BICyan}[${BIWhite}22${BICyan}] TASK MANAGER${NC}          │  ${BI
 echo -e "  ${BICyan}[${BIWhite}23${BICyan}] DNS CHANGER${NC}           │  ${BICyan}[${BIWhite}27${BICyan}] INSTALL BBRPLUS${NC}"
 echo -e "  ${BICyan}[${BIWhite}24${BICyan}] NETFLIX CHECKER${NC}       │  ${BICyan}[${BIWhite}28${BICyan}] SWAPRAM MENU${NC}"
 echo -e "  ${BICyan}[${BIWhite}25${BICyan}] TENDANG${NC}               │  ${BICyan}[${BIWhite}29${BICyan}] BACKUP${NC}"
-echo -e "  ${BICyan}[${BIWhite}0 ${BICyan}] MENU${NC}                  │  ${BICyan}[${BIWhite}30${BICyan}] INTL UDP${NC}"
+echo -e "  ${BICyan}[${BIWhite}10${BICyan}] MENU${NC}                  │  ${BICyan}[${BIWhite}30${BICyan}] INTL UDP${NC}"
+echo -e "  ${BICyan}[${BIWhite}0 ${BICyan}] MENU${NC}                  │  ${BICyan}[${BIWhite}31${BICyan}] INTL UDP${NC}"
 echo -e "  ${BICyan}[${BIWhite}x ${BICyan}] EXIT${NC}                  │  ${BICyan}[${BIWhite}99${BICyan}] RESTORE${NC}"
 echo -e "${BICyan} └────────────────────────────────────────────────────────────┘${NC}"
 echo -e " ${BICyan}┌─────────────────────────────────────┐${NC}"
@@ -261,7 +262,7 @@ case $opt in
 7) clear ; autoreboot ;;
 8) clear ; reboot ;;
 9) clear ; restart ;;
-#10) clear ; menu-bckp ;;
+10) clear ; menu-bckp ;;
 11) clear ; addhost ;;
 12) clear ; genssl ;;
 13) clear ; nano /etc/issue.net ;;
@@ -284,7 +285,7 @@ case $opt in
 99) clear ; restore ;;
 #88) clear ; wget https://raw.githubusercontent.com/NevermoreSSH/Vergil/main2/addons/dns2.sh && chmod +x dns2.sh && ./dns2.sh ;;
 30) clear ; wget https://raw.githubusercontent.com/NevermoreSSH/Vergil/main/Tunnel/udp.sh && bash udp.sh ;;
-#22) clear ; wget https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/cf.sh && chmod +x cf.sh && ./cf.sh ;;
+31) clear ; wget https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/cf.sh && chmod +x cf.sh && ./cf.sh ;;
 #25) clear ; del-xrays ;;
 #30) clear ; user-xrays ;;
 0) clear ; menu ;;
