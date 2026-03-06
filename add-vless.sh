@@ -152,6 +152,28 @@ echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━�
 echo -e "Expired On : $exp" | tee -a /etc/log-create-user.log
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
 echo "" | tee -a /etc/log-create-user.log
+
+source /usr/bin/bot.sh
+VLESS_MSG="╔════════════════════╗
+      ✨ VLESS PREMIUM ✨
+╚════════════════════╝
+👤 <b>User :</b> <code>$user</code>
+📅 <b>Expired :</b> <code>$exp</code>
+🌐 <b>Domain :</b> <code>$domain</code>
+━━━━━━━━━━━━━━━━━━━━━━
+🌐 <b>Link TLS :</b>
+<code>$vlesslink1</code>
+
+🌐 <b>Link Non-TLS :</b>
+<code>$vlesslink2</code>
+
+🔗 <b>Link gRPC :</b>
+<code>$vlesslink3</code>
+━━━━━━━━━━━━━━━━━━━━━━
+✅ *Auto-Script By AJI VPN*"
+
+send_log "$VLESS_MSG"
+
 read -n 1 -s -r -p "Press any key to back on menu"
 
 menu
