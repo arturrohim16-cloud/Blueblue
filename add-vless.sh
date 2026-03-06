@@ -113,13 +113,13 @@ VLESS_MSG="╔════════════════════╗
 🌐 <b>Domain :</b> <code>$domain</code>
 ━━━━━━━━━━━━━━━━━━━━━━
 🌐 <b>Link TLS :</b>
-<code>${vlesslink1}</code>
+<code>${vlesslink1}" | tee -a /etc/log-create-user.log</code>
 
 🌐 <b>Link Non-TLS :</b>
-<code>${vlesslink2}</code>
+<code>${vlesslink2}" | tee -a /etc/log-create-user.log</code>
 
 🔗 <b>Link gRPC :</b>
-<code>${vlesslink3}</code>
+<code>${vlesslink3}" | tee -a /etc/log-create-user.log</code>
 ━━━━━━━━━━━━━━━━━━━━━━
 ✅ *Auto-Script By AJI VPN*"
 
