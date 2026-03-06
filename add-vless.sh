@@ -100,7 +100,6 @@ sed -i '/#vless$/a\#vls '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
 sed -i '/#vlessgrpc$/a\#vlsg '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
-cat > /home/vps/public_html/vless-$user.txt <<-END
 
 source /usr/bin/bot.sh
 VLESS_MSG="╔════════════════════╗
