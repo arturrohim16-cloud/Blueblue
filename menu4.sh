@@ -206,8 +206,8 @@ cores=$(awk -F: '/model name/ {core++} END {print core}' /proc/cpuinfo)
 freq=$(awk -F: ' /cpu MHz/ {freq=$2} END {print freq}' /proc/cpuinfo)
 clear
 echo -e "${BICyan} ┌────────────────────────────────────────────────────────────┐${NC}"
-echo -e "${BICyan} │"                  ${BIWhite}${UWhite}Server Informations${NC}"         
-echo -e "${BICyan} │                                                                      
+echo -e "${BICyan} │                  ${BIWhite}${UWhite}Server Informations${NC}"         
+echo -e "${BICyan} │"                                                                      
 echo -e "${BICyan} │  ${BICyan}OS Linux        :  "$(hostnamectl | grep "Operating System" | cut -d ' ' -f5-)  
 echo -e "${BICyan} │  ${BICyan}Kernel          :  ${BICyan}$(uname -r)${NC}"  
 echo -e "${BICyan} │  ${BICyan}CPU Name        :  ${BIWhite}$cname${NC}"
@@ -243,7 +243,7 @@ echo -e "  ${BICyan}[${BIWhite}23${BICyan}] DNS CHANGER${NC}           │  ${BI
 echo -e "  ${BICyan}[${BIWhite}24${BICyan}] NETFLIX CHECKER${NC}       │  ${BICyan}[${BIWhite}28${BICyan}] SWAPRAM MENU${NC}"
 echo -e "  ${BICyan}[${BIWhite}25${BICyan}] TENDANG${NC}               │  ${BICyan}[${BIWhite}29${BICyan}] BACKUP${NC}"
 echo -e "  ${BICyan}[${BIWhite}10${BICyan}] MENU${NC}                  │  ${BICyan}[${BIWhite}30${BICyan}] INTL UDP${NC}"
-echo -e "  ${BICyan}[${BIWhite}0 ${BICyan}] MENU${NC}                  │  ${BICyan}[${BIWhite}31${BICyan}] INTL UDP${NC}"
+echo -e "  ${BICyan}[${BIWhite}0 ${BICyan}] MENU${NC}                  │  ${BICyan}[${BIWhite}31${BICyan}] CF INTL${NC}"
 echo -e "  ${BICyan}[${BIWhite}x ${BICyan}] EXIT${NC}                  │  ${BICyan}[${BIWhite}99${BICyan}] RESTORE${NC}"
 echo -e "${BICyan} └────────────────────────────────────────────────────────────┘${NC}"
 echo -e " ${BICyan}┌─────────────────────────────────────┐${NC}"
