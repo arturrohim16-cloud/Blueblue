@@ -205,21 +205,21 @@ cname=$(awk -F: '/model name/ {name=$2} END {print name}' /proc/cpuinfo)
 cores=$(awk -F: '/model name/ {core++} END {print core}' /proc/cpuinfo)
 freq=$(awk -F: ' /cpu MHz/ {freq=$2} END {print freq}' /proc/cpuinfo)
 clear
-echo -e "${BICyan} ┌────────────────────────────────────────────────────────────┐${NC}"
-echo -e "${BICyan} │                  ${BIWhite}${UWhite}Server Informations${NC}"         
-echo -e "${BICyan} │"                                                                      
-echo -e "${BICyan} │  ${BICyan}OS Linux        :  "$(hostnamectl | grep "Operating System" | cut -d ' ' -f5-)  
-echo -e "${BICyan} │  ${BICyan}Kernel          :  ${BICyan}$(uname -r)${NC}"  
-echo -e "${BICyan} │  ${BICyan}CPU Name        :  ${BIWhite}$cname${NC}"
-echo -e "${BICyan} │  ${BICyan}CPU Info        :  ${BIWhite}$cores Cores @ $freq MHz (${cpu_usage}) ${NC}"
-echo -e "${BICyan} │  ${BICyan}Total RAM       :  ${BIWhite}${ram_used}MB / ${total_ram}MB (${ram_usage}%) ${NC}" 
-echo -e "${BICyan} │  ${BICyan}System Uptime   :  ${BIWhite}$uptime${NC}"
-echo -e "${BICyan} │  ${BICyan}Current Domain  :  ${BIWhite}$(cat /etc/xray/domain)${NC}" 
-echo -e "${BICyan} │  ${BICyan}IP-VPS          :  ${BIWhite}$IPVPS${NC}"                  
-echo -e "${BICyan} │  ${BICyan}ISP-VPS         :  ${BIWhite}$ISPVPS${NC}"  
-echo -e "${BICyan} │  ${BICyan}Daily Bandwidth :  ${BIWhite}$daily_usage ${NC}"
-echo -e "${BICyan} │  ${BICyan}Total Bandwidth :  ${BIWhite}$monthly_usage ${NC}"
-echo -e "${BICyan} └────────────────────────────────────────────────────────────┘${NC}"
+echo -e "${BICyan} █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█${NC}"
+echo -e "${BICyan} █                  ${BIWhite}${UWhite}Server Informations${NC}"         
+echo -e "${BICyan} █"                                                                      
+echo -e "${BICyan} █  ${BICyan}OS Linux        :  "$(hostnamectl | grep "Operating System" | cut -d ' ' -f5-)  
+echo -e "${BICyan} █  ${BICyan}Kernel          :  ${BICyan}$(uname -r)${NC}"  
+echo -e "${BICyan} █  ${BICyan}CPU Name        :  ${BIWhite}$cname${NC}"
+echo -e "${BICyan} █  ${BICyan}CPU Info        :  ${BIWhite}$cores Cores @ $freq MHz (${cpu_usage}) ${NC}"
+echo -e "${BICyan} █  ${BICyan}Total RAM       :  ${BIWhite}${ram_used}MB / ${total_ram}MB (${ram_usage}%) ${NC}" 
+echo -e "${BICyan} █  ${BICyan}System Uptime   :  ${BIWhite}$uptime${NC}"
+echo -e "${BICyan} █  ${BICyan}Current Domain  :  ${BIWhite}$(cat /etc/xray/domain)${NC}" 
+echo -e "${BICyan} █  ${BICyan}IP-VPS          :  ${BIWhite}$IPVPS${NC}"                  
+echo -e "${BICyan} █  ${BICyan}ISP-VPS         :  ${BIWhite}$ISPVPS${NC}"  
+echo -e "${BICyan} █  ${BICyan}Daily Bandwidth :  ${BIWhite}$daily_usage ${NC}"
+echo -e "${BICyan} █  ${BICyan}Total Bandwidth :  ${BIWhite}$monthly_usage ${NC}"
+echo -e "${BICyan} █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█${NC}"
 echo -e "          ${BICyan} SSH ${NC}: $ressh""   ${BICyan} NGINX ${NC}: $resngx""    ${BICyan}  XRAY ${NC}: $resv2r"" ${BICyan} TROJAN ${NC}: $resv2r"
 echo -e "     ${BICyan} DROPBEAR ${NC}: $resdbr" "${BICyan} SSH-WS ${NC}: $ressshws" ${BICyan} Stunnel ${NC}: $sshstunel" "${BICyan}
 echo -e "${BICyan}  ╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮${NC}"
