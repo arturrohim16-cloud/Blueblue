@@ -102,26 +102,26 @@ sed -i '/#vlessgrpc$/a\#vlsg '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
 cat > /home/vps/public_html/vless-$user.txt <<-END
 
-====================================================================
-             P R O J E C T  O F  N E V E R M O R E S S H
-                       [Freedom Internet]
-====================================================================
-        https://github.com/NevermoreSSH/Blueblue
-====================================================================
-              Format Vless WS/GRPC
-====================================================================
+source /usr/bin/bot.sh
+VLESS_MSG="╔════════════════════╗
+      ✨ VLESS PREMIUM ✨
+╚════════════════════╝
+👤 <b>User :</b> <code>$user</code>
+📅 <b>Expired :</b> <code>$exp</code>
+🌐 <b>Domain :</b> <code>$domain</code>
+━━━━━━━━━━━━━━━━━━━━━━
+🌐 <b>Link TLS :</b>
+<code>$vlesslink1</code>
 
-_______________________________________________________
-              Link Vless Account
-_______________________________________________________
-Link TLS : vless://${uuid}@${domain}:443?type=ws&encryption=none&security=tls&host=${domain}&path=/vless&allowInsecure=1&sni=${domain}#XRAY_VLESS_TLS_${user}
-_______________________________________________________
-Link none TLS : vless://${uuid}@${domain}:80?type=ws&encryption=none&security=none&host=${domain}&path=/vless#XRAY_VLESS_NTLS_${user}
-_______________________________________________________
-Link GRPC : vless://${uuid}@${domain}:$tls?mode=gun&security=tls&encryption=none&type=grpc&serviceName=vless-grpc&sni=bug.com#VLESS_GRPC_${user}
-_______________________________________________________
-Expired On : $exp
-_______________________________________________________
+🌐 <b>Link Non-TLS :</b>
+<code>$vlesslink2</code>
+
+🔗 <b>Link gRPC :</b>
+<code>$vlesslink3</code>
+━━━━━━━━━━━━━━━━━━━━━━
+✅ *Auto-Script By AJI VPN*"
+
+send_log "$VLESS_MSG"
 
 END
 vlesslink1="vless://${uuid}@${domain}:443?type=ws&encryption=none&security=tls&host=${domain}&path=/vless&allowInsecure=1&sni=${domain}#XRAY_VLESS_TLS_${user}"
