@@ -4,14 +4,14 @@ MYIP=$(wget -qO- ipinfo.io/ip);
 MYIP=$(curl -s ipinfo.io/ip )
 MYIP=$(curl -sS ipv4.icanhazip.com)
 MYIP=$(curl -sS ifconfig.me )
-#MYIP=$(wget -qO- https://ipv4.icanhazip.com);
-#MYIP=$(wget -qO- https://ipv6.icanhazip.com);
+MYIP=$(wget -qO- https://ipv4.icanhazip.com);
+MYIP=$(wget -qO- https://ipv6.icanhazip.com);
 clear
 apt install jq curl -y
-# sub=$(</dev/urandom tr -dc a-z | head -c4)
+sub=$(</dev/urandom tr -dc a-z | head -c4)
 sub=$(premium)
 DOMAIN=aji.izz-store.my.id
-SUB_DOMAIN=${sub}aji.izz-store.my.id
+SUB_DOMAIN=aji.izz-store.my.id
 CF_ID=ajijainalganteng@gmail.com
 CF_KEY=565df838cbdf80722e12eb5b1d7186143b74e
 set -euo pipefail
