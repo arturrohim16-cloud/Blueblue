@@ -72,24 +72,24 @@ apt install socat cron bash-completion ntpdate -y
 ntpdate -u pool.ntp.org
 apt -y install chrony
 timedatectl set-ntp true
-#systemctl enable chronyd && systemctl restart chronyd
+systemctl enable chronyd && systemctl restart chronyd
 systemctl enable chrony && systemctl restart chrony
 timedatectl set-timezone Asia/Kuala_Lumpur
-#chronyc sourcestats -v
-#chronyc tracking -v
+chronyc sourcestats -v
+chronyc tracking -v
 apt install curl pwgen openssl netcat cron -y
 
 # Make Folder & Log XRay & Log Trojan
 rm -fr /var/log/xray
-#rm -fr /var/log/trojan
+rm -fr /var/log/trojan
 rm -fr /home/vps/public_html
 mkdir -p /var/log/xray
-#mkdir -p /var/log/trojan
+mkdir -p /var/log/trojan
 mkdir -p /home/vps/public_html
 chown www-data.www-data /var/log/xray
 chown www-data.www-data /etc/xray
 chmod +x /var/log/xray
-#chmod +x /var/log/trojan
+chmod +x /var/log/trojan
 touch /var/log/xray/access.log
 touch /var/log/xray/error.log
 touch /var/log/xray/access2.log
@@ -181,7 +181,7 @@ curl https://get.acme.sh | sh
 alias acme.sh=~/.acme.sh/acme.sh
 /root/.acme.sh/acme.sh --upgrade --auto-upgrade
 /root/.acme.sh/acme.sh --set-default-ca --server letsencrypt
-#/root/.acme.sh/acme.sh --issue -d "${domain}" --standalone --keylength ec-2048
+/root/.acme.sh/acme.sh --issue -d "${domain}" --standalone --keylength ec-2048
 /root/.acme.sh/acme.sh --issue -d "${domain}" --standalone --keylength ec-256
 /root/.acme.sh/acme.sh --install-cert -d "${domain}" --ecc \
 --fullchain-file /etc/xray/xray.crt \
