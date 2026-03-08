@@ -201,7 +201,7 @@ wget -q -O /usr/bin/menu-bckp "https://raw.githubusercontent.com/NevermoreSSH/Bl
 wget -q -O /usr/bin/menu-bckp "https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/menu-bckp-github.sh"
 wget -q -O /usr/bin/bckp "https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/bckpbot.sh"
 wget -q -O /usr/bin/usernew "https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/usernew.sh"
-# wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/menu.sh"
+wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/menu.sh"
 wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/menu4.sh"
 wget -q -O /usr/bin/wbm "https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/webmin.sh"
 wget -q -O /usr/bin/xp "https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/xp.sh"
@@ -209,8 +209,8 @@ wget -q -O /usr/bin/update "https://raw.githubusercontent.com/NevermoreSSH/Blueb
 wget -q -O /usr/bin/dns "https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/dns.sh"
 wget -q -O /usr/bin/netf "https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/netf.sh"
 wget -q -O /usr/bin/bbr "https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/bbr.sh"
-#wget -q -O /usr/bin/del-xrays "https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/del-xrays.sh"
-#wget -q -O /usr/bin/user-xrays "https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/user-xrays.sh"
+wget -q -O /usr/bin/del-xrays "https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/del-xrays.sh"
+wget -q -O /usr/bin/user-xrays "https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/user-xrays.sh"
 chmod +x /usr/bin/add-ws
 chmod +x /usr/bin/add-ssws
 chmod +x /usr/bin/add-socks
@@ -268,11 +268,11 @@ echo "0 23 * * * root backup" >> /etc/crontab
 echo "5 23 * * * root /usr/bin/backup" >> /etc/crontab
 cd
 
-#cat > /etc/cron.d/re_otm <<-END
-#SHELL=/bin/sh
-#PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-#0 7 * * * root /sbin/reboot
-#END
+cat > /etc/cron.d/re_otm <<-END
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+0 7 * * * root /sbin/reboot
+END
 
 cat > /etc/cron.d/xp_otm <<-END
 SHELL=/bin/sh
