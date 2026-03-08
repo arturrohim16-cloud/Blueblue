@@ -36,17 +36,17 @@ echo ""
 echo " This Feature Can Only Be Used According To VPS Data With This Autoscript"
 echo " Please Insert VPS Data Backup Link To Restore The Data"
 echo ""
-#read -rp " Password File: " -e InputPass
+read -rp " Password File: " -e InputPass
 read -rp " Link File: " -e url
 wget -O backup.zip "$url"
-#unzip -P $InputPass /root/backup.zip &> /dev/null
+unzip -P $InputPass /root/backup.zip &> /dev/null
 unzip backup.zip
 rm -f backup.zip
 sleep 1
 echo -e "[ ${green}INFO${NC} ] Start Restore . . . "
-#cp -r /root/backup/.acme.sh /root/ &> /dev/null
-#cp -r /root/backup/premium-script /var/lib/ &> /dev/null
-#cp -r /root/backup/xray /usr/local/etc/ &> /dev/null
+cp -r /root/backup/.acme.sh /root/ &> /dev/null
+cp -r /root/backup/premium-script /var/lib/ &> /dev/null
+cp -r /root/backup/xray /usr/local/etc/ &> /dev/null
 cp -r /root/backup/public_html /home/vps/ &> /dev/null
 cp -r /root/backup/xray/ /etc/ >/dev/null
 cp -r /root/backup/crontab /etc/ &> /dev/null
