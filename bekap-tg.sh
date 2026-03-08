@@ -343,11 +343,11 @@ echo -e "${BICyan} ┌───────────────────�
 echo -e "       ${BIWhite}${UWhite}Backup / Restore ${NC}"
 echo -e ""
 echo -e "     ${BICyan}[${BIWhite}1${BICyan}] Backup   "
-#echo -e "     ${BICyan}[${BIWhite}2${BICyan}] Auto Backup   "
+echo -e "     ${BICyan}[${BIWhite}2${BICyan}] Auto Backup   "
 echo -e "     ${BICyan}[${BIWhite}2${BICyan}] Restore      "
 echo -e "     ${BICyan}[${BIWhite}3${BICyan}] Backup Via Bot   "
 echo -e "     ${BICyan}[${BIWhite}4${BICyan}] Auto Backup Bot  "
-#echo -e "     ${BICyan}[${BIWhite}4${BICyan}] Check User XRAY     "
+echo -e "     ${BICyan}[${BIWhite}4${BICyan}] Check User XRAY     "
 echo -e " ${BICyan}└─────────────────────────────────────────────────────┘${NC}"
 echo -e "     ${BIYellow}Press x or [ Ctrl+C ] • To-${BIWhite}Exit${NC}"
 echo ""
@@ -355,7 +355,7 @@ read -p " Select menu : " opt
 echo -e ""
 case $opt in
 1) clear ; backup ;;
-#2) clear ; bckp ;;
+2) clear ; bckp ;;
 2) clear ; restore;;
 3) clear ; bckpbot;;
 4) clear ; autobckpbot;;
