@@ -13,8 +13,8 @@ LIGHT='\033[0;37m'
 # ==========================================
 # Getting
 MYIP=$(wget -qO- ipinfo.io/ip);
-#MYIP=$(wget -qO- https://ipv4.icanhazip.com);
-#MYIP=$(wget -qO- https://ipv6.icanhazip.com);
+MYIP=$(wget -qO- https://ipv4.icanhazip.com);
+MYIP=$(wget -qO- https://ipv6.icanhazip.com);
 clear
 apt install jq curl -y
 DOMAIN=nevermoressh.me
