@@ -14,8 +14,8 @@ apt install -y jq curl
 IP=$(curl -s ifconfig.me)
 
 # Input domain dari user
-read -rp "Masukkan Domain Anda : " DOMAIN
-
+read -rp "Domain/Host: " -e host
+echo "IP=$host" >> /var/lib/premium-script/ipvps.conf
 # Subdomain (bisa sama dengan domain utama)
 SUB_DOMAIN="$DOMAIN"
 
