@@ -1,52 +1,92 @@
-# // String / Request Data
-# Getting
-MYIP=$(wget -qO- ipinfo.io/ip);
-MYIP=$(curl -s ipinfo.io/ip )
-MYIP=$(curl -sS ipv4.icanhazip.com)
-MYIP=$(curl -sS ifconfig.me )
-MYIP=$(wget -qO- https://ipv4.icanhazip.com);
-MYIP=$(wget -qO- https://ipv6.icanhazip.com);
+#!/bin/bash
+
 clear
-apt install jq curl -y
-sub=$(</dev/urandom tr -dc a-z | head -c4)
-sub=$(premium)
-DOMAIN=aji.izz-store.my.id
-SUB_DOMAIN=aji.izz-store.my.id
-CF_ID=ajijainalganteng@gmail.com
-CF_KEY=565df838cbdf80722e12eb5b1d7186143b74e
-set -euo pipefail
-IP=$(curl -sS ifconfig.me);
-echo "Updating DNS for ${SUB_DOMAIN}..."
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "        AUTO DOMAIN SETUP   "
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+
+# Install dependency jika belum ada
+apt update -y
+apt install -y jq curl
+
+# Ambil IP VPS
+IP=$(curl -s ifconfig.me)
+
+# Input domain dari user
+read -rp "Masukkan Domain Anda : " DOMAIN
+
+# Subdomain (bisa sama dengan domain utama)
+SUB_DOMAIN="$DOMAIN"
+
+# Cloudflare API
+CF_ID="ajijainalganteng@gmail.com"
+CF_KEY=""
+
+echo ""
+echo "IP VPS  : $IP"
+echo "Domain  : $SUB_DOMAIN"
+echo ""
+sleep 2
+
+echo "Updating DNS Cloudflare..."
+
+# Ambil Zone ID Cloudflare
 ZONE=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones?name=${DOMAIN}&status=active" \
-     -H "X-Auth-Email: ${CF_ID}" \
-     -H "X-Auth-Key: ${CF_KEY}" \
-     -H "Content-Type: application/json" | jq -r .result[0].id)
+-H "X-Auth-Email: ${CF_ID}" \
+-H "X-Auth-Key: ${CF_KEY}" \
+-H "Content-Type: application/json" | jq -r '.result[0].id')
 
+# Ambil DNS Record jika sudah ada
 RECORD=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records?name=${SUB_DOMAIN}" \
-     -H "X-Auth-Email: ${CF_ID}" \
-     -H "X-Auth-Key: ${CF_KEY}" \
-     -H "Content-Type: application/json" | jq -r .result[0].id)
+-H "X-Auth-Email: ${CF_ID}" \
+-H "X-Auth-Key: ${CF_KEY}" \
+-H "Content-Type: application/json" | jq -r '.result[0].id')
 
+# Jika record belum ada maka buat record baru
 if [[ "${#RECORD}" -le 10 ]]; then
-     RECORD=$(curl -sLX POST "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records" \
-     -H "X-Auth-Email: ${CF_ID}" \
-     -H "X-Auth-Key: ${CF_KEY}" \
-     -H "Content-Type: application/json" \
-     --data '{"type":"A","name":"'${SUB_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}' | jq -r .result.id)
+    RECORD=$(curl -sLX POST "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records" \
+    -H "X-Auth-Email: ${CF_ID}" \
+    -H "X-Auth-Key: ${CF_KEY}" \
+    -H "Content-Type: application/json" \
+    --data '{
+        "type":"A",
+        "name":"'"${SUB_DOMAIN}"'",
+        "content":"'"${IP}"'",
+        "ttl":120,
+        "proxied":false
+    }' | jq -r '.result.id')
 fi
 
+# Update DNS record
 RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records/${RECORD}" \
-     -H "X-Auth-Email: ${CF_ID}" \
-     -H "X-Auth-Key: ${CF_KEY}" \
-     -H "Content-Type: application/json" \
-     --data '{"type":"A","name":"'${SUB_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}')
-     
+-H "X-Auth-Email: ${CF_ID}" \
+-H "X-Auth-Key: ${CF_KEY}" \
+-H "Content-Type: application/json" \
+--data '{
+    "type":"A",
+    "name":"'"${SUB_DOMAIN}"'",
+    "content":"'"${IP}"'",
+    "ttl":120,
+    "proxied":false
+}')
+
+echo ""
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "Domain berhasil ditambahkan"
 echo "Host : $SUB_DOMAIN"
-echo $SUB_DOMAIN > /root/domain
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+# Simpan domain
+mkdir -p /var/lib/scrz-prem
+mkdir -p /etc/xray
+
+echo "$SUB_DOMAIN" > /root/domain
 echo "IP=$SUB_DOMAIN" > /var/lib/scrz-prem/ipvps.conf
-sleep 1
-yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
-yellow "Domain added.."
-sleep 3
-domain=$(cat /root/domain)
-cp -r /root/domain /etc/xray/domain
+
+# Copy domain ke xray
+cp /root/domain /etc/xray/domain
+
+echo ""
+echo "Setup selesai."
+sleep 2
