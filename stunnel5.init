@@ -176,9 +176,9 @@ if [ "x$OPTIONS" != "x" ]; then
   OPTIONS="-- $OPTIONS"
 fi
 
-# If the user want to manage a single tunnel, the conf file's name
-# is in $2. Otherwise, respect /usr/local/etc/default/stunnel4 setting.
-# If no setting there, use /usr/local/etc/stunnel/*.conf.
+If the user want to manage a single tunnel, the conf file's name
+is in $2. Otherwise, respect /usr/local/etc/default/stunnel4 setting.
+ If no setting there, use /usr/local/etc/stunnel/*.conf.
 if [ -n "${2:-}" ]; then
   if [ -e "/etc/stunnel5/stunnel5.conf" ]; then
     FILES="/etc/stunnel5/stunnel5.conf"
