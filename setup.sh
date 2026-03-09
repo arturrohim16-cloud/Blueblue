@@ -214,7 +214,7 @@ wget -q -O /usr/bin/menu-ss "https://raw.githubusercontent.com/arturrohim16-clou
 wget -q -O /usr/bin/menu-trojan "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/main/menu-trojan.sh"
 wget -q -O /usr/bin/menu-trgo "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/main/menu-trgo.sh"
 wget -q -O /usr/bin/menu-ssh "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/main/menu-ssh.sh"
-wget -q -O /usr/bin/menu-bckp "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/main/menu-bckp-telegram.sh"
+wget -q -O /usr/bin/menu-bckp "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/bekap-tg.sh"
 wget -q -O /usr/bin/menu-bckp "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/main/menu-bckp-github.sh"
 wget -q -O /usr/bin/bckp "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/main/bckpbot.sh"
 wget -q -O /usr/bin/usernew "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/main/usernew.sh"
