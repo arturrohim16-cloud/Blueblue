@@ -193,7 +193,7 @@ wget -q https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/set-br.sh &
 echo -e "${GREEN}Download Data${NC}"
 wget -q -O /usr/bin/add-ws "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/add-ws.sh"
 wget -q -O /usr/bin/add-ssws "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/add-ssws.sh"
-wget -q -O /usr/bin/add-socks "https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/add-socks.sh"
+wget -q -O /usr/bin/add-socks "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/add-socks.sh"
 wget -q -O /usr/bin/add-vless "https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/add-vless.sh"
 wget -q -O /usr/bin/add-tr "https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/add-tr.sh"
 wget -q -O /usr/bin/add-trgo "https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/add-trgo.sh"
