@@ -44,14 +44,6 @@ export BOLD="\e[1m"
 export WARNING="${RED}\e[5m"
 export UNDERLINE="\e[4m"
 
-# // Exporting URL Host
-export Server_URL="raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/test"
-export Server1_URL="raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/limit"
-export Server_Port="443"
-export Server_IP="underfined"
-export Script_Mode="Stable"
-export Auther=".geovpn"
-
 # // Exporting Script Version
 export VERSION="1.1"
  
@@ -356,9 +348,7 @@ cd /root/limit
     git add . &> /dev/null
     git commit -m m &> /dev/null
     git branch -M main &> /dev/null
-    git remote add origin https://github.com/arturrohim16-cloud/limit
-    git push -f https://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@github.com/kenDevXD/limit.git &> /dev/null
-cd
+ cd
 echo "1.1" >> /home/.ver
 rm -fr /root/limit
 curl -sS ifconfig.me > /etc/myipvps
