@@ -137,22 +137,15 @@ mkdir -p /usr/bin/xray
 mkdir -p /etc/xray
 mkdir -p /usr/local/etc/xray
 
-#rm -fr /etc/xray/domain
-# // String / Request Data
-mkdir -p /var/lib/scrz-prem >/dev/null 2>&1
-echo "IP=$host" >> /var/lib/scrz-prem/ipvps.conf
-echo $host > /etc/xray/domain
-wget https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/cf.sh && chmod +x cf.sh && ./cf.sh
+read -p "Masukkan domain yang sudah pointing ke VPS: " DOMAIN
+
+mkdir -p /etc/xray
+echo $DOMAIN > /etc/xray/domain
+
+echo "Domain aktif : $DOMAIN"
 
 sleep 2
 
-#install jembot
-echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
-echo -e "                          ⇱ INSTALL DOMAIN ⇲            "
-echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
-sleep 1
-wget https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/cf.sh && chmod +x cf.sh && ./cf.sh
-#install jembot
 echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
 echo -e " \E[41;1;39m           ⇱ Install Jembot ⇲            \E[0m$NC"
 echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
