@@ -125,6 +125,56 @@ Restart=on-failure
 WantedBy=multi-user.target
 END
 
+wget -q -O /usr/bin/ws-nontls.sh https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-nontls.sh && chmod +x /usr/bin/ws-nontls.sh && ./ws-nontls.sh
+
+cat > /etc/systemd/system/ws-nontls.service << END
+[Unit]
+Description=Python Proxy Mod By geovpn
+Documentation=https://t.me/geovpn
+After=network.target nss-lookup.target
+
+[Service]
+Type=simple
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=/usr/bin/python -O /usr/local/bin/ws-nontls 8880
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+END
+systemctl daemon-reload
+systemctl enable ws-nontls
+systemctl restart ws-nontls
+
+clear
+
+wget -q -O /usr/bin/ws-ovpn.sh https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-opnvpn.sh && chmod +x /usr/bin/ws-ovpn.sh && ./ws-ovpn.sh
+
+cat > /etc/systemd/system/ws-ovpn.service << END
+[Unit]
+Description=Python Proxy Mod By geovpn
+Documentation=https://t.me/geovpn
+After=network.target nss-lookup.target
+
+[Service]
+Type=simple
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=/usr/bin/python -O /usr/local/bin/ws-ovpn 2086
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+END
+systemctl daemon-reload
+systemctl enable ws-ovpn
+systemctl restart ws-ovpn
+
 # // 2. WEBSOCKET TLS (Port 443)
 echo -e "[ ${GREEN}INFO${NC} ] Setup WS-TLS..."
 wget -q -O /usr/local/bin/ws-tls https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-tls.sh
