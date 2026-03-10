@@ -172,11 +172,7 @@ echo -e "$white\033[0;34m┌─────────────────�
 echo -e " \E[41;1;39m          ⇱ Install SSH / WS ⇲           \E[0m$NC"
 echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
 sleep 1
-wget -q https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
-wget -q -O /usr/bin/ws-tls.sh https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-tls.sh && chmod +x /usr/bin/ws-tls.sh && ./ws-tls.sh
-wget -q -O /usr/bin/ws-nontls.sh https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-nontls.sh && chmod +x /usr/bin/ws-nontls.sh && ./ws-nontls.sh
-wget -q -O /usr/bin/ws-ovpn.sh https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-opnvpn.sh && chmod +x /usr/bin/ws-ovpn.sh && ./ws-ovpn.sh
-wget -q -O /usr/bin/ws-stunnel https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-stunnel && chmod +x /usr/bin/ws-stunnel && ./ws-stunnel
+wget -q -O ssh-vpn.sh https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
 
 #install ins-xray
 echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
