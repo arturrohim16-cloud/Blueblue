@@ -209,6 +209,30 @@ systemctl restart ws-ovpn
 clear
 
 wget -q -O /usr/bin/ws-stunnel https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-stunnel && chmod +x /usr/bin/ws-stunnel && ./ws-stunnel
+# Installing Service Ovpn Websocket
+cat > /etc/systemd/system/ws-stunnel.service << END
+[Unit]
+Description=Ovpn Websocket By Akhir Zaman
+Documentation=https://xnxx.com
+After=network.target nss-lookup.target
+
+[Service]
+Type=simple
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=/usr/bin/python2 -O /usr/local/bin/ws-stunnel
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+END
+
+systemctl daemon-reload >/dev/null 2>&1
+systemctl enable ws-stunnel >/dev/null 2>&1
+systemctl start ws-stunnel >/dev/null 2>&1
+systemctl restart ws-stunnel >/dev/null 2>&1
 
 clear
 
