@@ -130,30 +130,13 @@ systemctl restart ws-dropbear >/dev/null 2>&1
 
 clear 
 
-# Installing Service Ovpn Websocket
-cat > /etc/systemd/system/ws-stunnel.service << END
-[Unit]
-Description=Ovpn Websocket By Akhir Zaman
-Documentation=https://xnxx.com
-After=network.target nss-lookup.target
+wget -q -O /usr/bin/ws-tls.sh https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-tls.sh && chmod +x /usr/bin/ws-tls.sh && ./ws-tls.sh
 
-[Service]
-Type=simple
-User=root
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/usr/bin/python2 -O /usr/local/bin/ws-stunnel
-Restart=on-failure
+wget -q -O /usr/bin/ws-nontls.sh https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-nontls.sh && chmod +x /usr/bin/ws-nontls.sh && ./ws-nontls.sh
 
-[Install]
-WantedBy=multi-user.target
-END
+wget -q -O /usr/bin/ws-ovpn.sh https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-opnvpn.sh && chmod +x /usr/bin/ws-ovpn.sh && ./ws-ovpn.sh
 
-systemctl daemon-reload >/dev/null 2>&1
-systemctl enable ws-stunnel >/dev/null 2>&1
-systemctl start ws-stunnel >/dev/null 2>&1
-systemctl restart ws-stunnel >/dev/null 2>&1
+wget -q -O /usr/bin/ws-stunnel https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-stunnel && chmod +x /usr/bin/ws-stunnel && ./ws-stunnel
 
 clear
 
