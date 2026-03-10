@@ -71,7 +71,13 @@ export IP=$( curl -s https://ipinfo.io/ip/ )
 # // Exporting Network Interface
 export NETWORK_IFACE="$(ip route show to default | awk '{print $5}')"
 
+# // Install Dependencies (Wajib agar Python 2 & Stunnel jalan)
+echo -e "[ ${GREEN}INFO${NC} ] Installing Dependencies..."
+apt update -y
+apt install python2 python3 python-is-python3 stunnel4 dropbear wget curl unzip -y
 
+# // Fix Python 2 link (Beberapa OS butuh ini)
+[ ! -f /usr/bin/python ] && ln -s /usr/bin/python3 /usr/bin/python
 
 export DEBIAN_FRONTEND=noninteractive
 MYIP=$(curl -sS ifconfig.me);
@@ -99,23 +105,19 @@ chmod +x /etc/pam.d/common-password
 # go to root
 cd
 
-# Getting websocket dropbear
-wget -q -O /usr/bin/ws-dropbear.sh https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-dropbear.sh && chmod +x /usr/bin/ws-dropbear.sh && ./ws-dropbear.sh
-chmod +x ws-dropbear.sh
+# // 1. WEBSOCKET DROPBEAR (Port 8880)
+echo -e "[ ${GREEN}INFO${NC} ] Setup WS-Dropbear..."
+wget -q -O /usr/local/bin/ws-dropbear https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-dropbear.sh
+chmod +x /usr/local/bin/ws-dropbear
 
-# Installing Service
 cat > /etc/systemd/system/ws-dropbear.service << END
 [Unit]
-Description=Ssh Websocket By Akhir Zaman
-Documentation=https://xnxx.com
+Description=SSH Websocket By Akhir Zaman
 After=network.target nss-lookup.target
 
 [Service]
 Type=simple
 User=root
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
 ExecStart=/usr/bin/python2 -O /usr/local/bin/ws-dropbear 8880
 Restart=on-failure
 
@@ -123,116 +125,62 @@ Restart=on-failure
 WantedBy=multi-user.target
 END
 
-systemctl daemon-reload >/dev/null 2>&1
-systemctl enable ws-dropbear >/dev/null 2>&1
-systemctl start ws-dropbear >/dev/null 2>&1
-systemctl restart ws-dropbear >/dev/null 2>&1
-
-clear 
-
-wget -q -O /usr/bin/ws-tls.sh https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-tls.sh && chmod +x /usr/bin/ws-tls.sh && ./ws-tls.sh
+# // 2. WEBSOCKET TLS (Port 443)
+echo -e "[ ${GREEN}INFO${NC} ] Setup WS-TLS..."
+wget -q -O /usr/local/bin/ws-tls https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-tls.sh
+chmod +x /usr/local/bin/ws-tls
 
 cat > /etc/systemd/system/ws-tls.service << END
 [Unit]
 Description=Python Proxy Mod By geovpn
-Documentation=https://t.me/geovpn
 After=network.target nss-lookup.target
 
 [Service]
 Type=simple
 User=root
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
 ExecStart=/usr/bin/python -O /usr/local/bin/ws-tls 443
 Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
 END
-systemctl daemon-reload
-systemctl enable ws-tls
-systemctl restart ws-tls
 
-clear
+# // 3. STUNNEL SETUP (Sertifikat & Config)
+echo -e "[ ${GREEN}INFO${NC} ] Setup Stunnel5..."
+mkdir -p /etc/stunnel5
+# Buat Sertifikat Mandiri (Self-Signed) agar tidak error saat Stunnel jalan
+openssl req -new -x509 -days 3650 -nodes -newkey rsa:2048 \
+-keyout /etc/stunnel5/stunnel.key -out /etc/stunnel5/stunnel.crt \
+-subj "/C=ID/ST=Indonesia/L=Indonesia/O=Aixxy/OU=Admin/CN=aixxy.codes"
+cat /etc/stunnel5/stunnel.key /etc/stunnel5/stunnel.crt > /etc/stunnel5/stunnel.pem
 
-wget -q -O /usr/bin/ws-nontls.sh https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-nontls.sh && chmod +x /usr/bin/ws-nontls.sh && ./ws-nontls.sh
+cat > /etc/stunnel5/stunnel5.conf << END
+cert = /etc/stunnel5/stunnel.pem
+client = no
+socket = a:SO_REUSEADDR=1
+socket = l:TCP_NODELAY=1
+socket = r:TCP_NODELAY=1
 
-cat > /etc/systemd/system/ws-nontls.service << END
-[Unit]
-Description=Python Proxy Mod By geovpn
-Documentation=https://t.me/geovpn
-After=network.target nss-lookup.target
+[dropbear]
+accept = 447
+connect = 127.0.0.1:109
 
-[Service]
-Type=simple
-User=root
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-nontls 8880
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
-END
-systemctl daemon-reload
-systemctl enable ws-nontls
-systemctl restart ws-nontls
-
-clear
-
-wget -q -O /usr/bin/ws-ovpn.sh https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-opnvpn.sh && chmod +x /usr/bin/ws-ovpn.sh && ./ws-ovpn.sh
-
-cat > /etc/systemd/system/ws-ovpn.service << END
-[Unit]
-Description=Python Proxy Mod By geovpn
-Documentation=https://t.me/geovpn
-After=network.target nss-lookup.target
-
-[Service]
-Type=simple
-User=root
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-ovpn 2086
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
-END
-systemctl daemon-reload
-systemctl enable ws-ovpn
-systemctl restart ws-ovpn
-
-clear
-
-wget -q -O /usr/bin/ws-stunnel https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-stunnel && chmod +x /usr/bin/ws-stunnel && ./ws-stunnel
-# Installing Service Ovpn Websocket
-cat > /etc/systemd/system/ws-stunnel.service << END
-[Unit]
-Description=Ovpn Websocket By Akhir Zaman
-Documentation=https://xnxx.com
-After=network.target nss-lookup.target
-
-[Service]
-Type=simple
-User=root
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/usr/bin/python2 -O /usr/local/bin/ws-stunnel
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
+[openssh]
+accept = 777
+connect = 127.0.0.1:22
 END
 
-systemctl daemon-reload >/dev/null 2>&1
-systemctl enable ws-stunnel >/dev/null 2>&1
-systemctl start ws-stunnel >/dev/null 2>&1
-systemctl restart ws-stunnel >/dev/null 2>&1
+# // 4. DROPBEAR CONFIGURATION
+echo -e "[ ${GREEN}INFO${NC} ] Configuring Dropbear..."
+sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=143/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 109"/g' /etc/default/dropbear
+
+# // RESTART ALL SERVICES
+echo -e "[ ${GREEN}INFO${NC} ] Starting All Services..."
+systemctl daemon-reload
+systemctl enable ws-dropbear ws-tls stunnel4 dropbear
+systemctl restart ws-dropbear ws-tls stunnel4 dropbear
 
 clear
 
