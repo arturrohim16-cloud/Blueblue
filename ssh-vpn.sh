@@ -130,10 +130,6 @@ systemctl restart ws-dropbear >/dev/null 2>&1
 
 clear 
 
-# Getting websocket ssl stunnel
-wget -q -O /usr/local/bin/ws-stunnel "https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/ws-stunnel"
-chmod +x /usr/local/bin/ws-stunnel
-
 # Installing Service Ovpn Websocket
 cat > /etc/systemd/system/ws-stunnel.service << END
 [Unit]
