@@ -153,6 +153,25 @@ END
 
 wget -q -O /usr/bin/ws-nontls.sh https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-nontls.sh && chmod +x /usr/bin/ws-nontls.sh && ./ws-nontls.sh
 
+cat > /etc/systemd/system/ws-nontls.service << END
+[Unit]
+Description=Python Proxy Mod By geovpn
+Documentation=https://t.me/geovpn
+After=network.target nss-lookup.target
+
+[Service]
+Type=simple
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=/usr/bin/python -O /usr/local/bin/ws-nontls 8880
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+END
+
 wget -q -O /usr/bin/ws-ovpn.sh https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-opnvpn.sh && chmod +x /usr/bin/ws-ovpn.sh && ./ws-ovpn.sh
 
 wget -q -O /usr/bin/ws-stunnel https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-stunnel && chmod +x /usr/bin/ws-stunnel && ./ws-stunnel
