@@ -150,6 +150,11 @@ Restart=on-failure
 [Install]
 WantedBy=multi-user.target
 END
+systemctl daemon-reload
+systemctl enable ws-tls
+systemctl restart ws-tls
+
+clear
 
 wget -q -O /usr/bin/ws-nontls.sh https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-nontls.sh && chmod +x /usr/bin/ws-nontls.sh && ./ws-nontls.sh
 
@@ -171,6 +176,11 @@ Restart=on-failure
 [Install]
 WantedBy=multi-user.target
 END
+systemctl daemon-reload
+systemctl enable ws-nontls
+systemctl restart ws-nontls
+
+clear
 
 wget -q -O /usr/bin/ws-ovpn.sh https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-opnvpn.sh && chmod +x /usr/bin/ws-ovpn.sh && ./ws-ovpn.sh
 
@@ -192,6 +202,11 @@ Restart=on-failure
 [Install]
 WantedBy=multi-user.target
 END
+systemctl daemon-reload
+systemctl enable ws-ovpn
+systemctl restart ws-ovpn
+
+clear
 
 wget -q -O /usr/bin/ws-stunnel https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-stunnel && chmod +x /usr/bin/ws-stunnel && ./ws-stunnel
 
