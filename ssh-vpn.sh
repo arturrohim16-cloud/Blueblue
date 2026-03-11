@@ -73,6 +73,7 @@ export NETWORK_IFACE="$(ip route show to default | awk '{print $5}')"
 
 # // Install Dependencies (Wajib agar Python 2 & Stunnel jalan)
 echo -e "[ ${GREEN}INFO${NC} ] Installing Dependencies..."
+apt install stunnel4 -y && ln -s /usr/bin/stunnel4 /usr/local/bin/stunnel5
 apt update -y
 apt install python2 python3 python-is-python3 stunnel4 dropbear wget curl unzip -y
 
@@ -178,7 +179,7 @@ systemctl restart ws-ovpn
 # // 2. WEBSOCKET TLS (Port 443)
 echo -e "[ ${GREEN}INFO${NC} ] Setup WS-TLS..."
 wget -q -O /usr/bin/ws-tls https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-tls.sh
-chmod +x /usr/local/bin/ws-tls
+chmod +x /usr/bin/ws-tls
 
 cat > /etc/systemd/system/ws-tls.service << END
 [Unit]
