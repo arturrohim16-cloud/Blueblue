@@ -82,12 +82,13 @@ echo -e "${GREEN}Starting Installation............${NC}"
 # // Go To Root Directory
 cd /root/
 # // Remove
+apt install openvpn -y
 apt install python2 -y
 apt-get remove --purge nginx* -y
 apt-get remove --purge nginx-common* -y
 apt-get remove --purge nginx-full* -y
 apt-get remove --purge dropbear* -y
-apt-get remove --purge stunnel4* -y
+apt-get remove --purge stunnel2* -y
 apt-get remove --purge apache2* -y
 apt-get remove --purge ufw* -y
 apt-get remove --purge firewalld* -y
