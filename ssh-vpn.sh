@@ -137,8 +137,8 @@ systemctl restart ws-dropbear >/dev/null 2>&1
 
 clear
 
-wget -q -O /usr/bin/ws-nontls.sh "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-nontls.sh && chmod +x /usr/bin/ws-nontls.sh && ./ws-nontls.sh"
-chmod +x /usr/bin/ws-nontls
+wget -q -O /usr/local/bin/ws-nontls.sh "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-nontls.sh && chmod +x /usr/bin/ws-nontls.sh && ./ws-nontls.sh"
+chmod +x /usr/local/bin/ws-nontls
 cat > /etc/systemd/system/ws-nontls.service << END
 [Unit]
 Description=Python Proxy Mod By geovpn
@@ -165,8 +165,8 @@ systemctl restart ws-nontls >/dev/null 2>&1
 
 clear
 
-wget -q -O /usr/bin/ws-ovpn.sh "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-opnvpn.sh && chmod +x /usr/bin/ws-ovpn.sh && ./ws-ovpn.sh"
-chmod +x /usr/bin/ws-ovpn
+wget -q -O /usr/local/bin/ws-ovpn.sh "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-opnvpn.sh && chmod +x /usr/bin/ws-ovpn.sh && ./ws-ovpn.sh"
+chmod +x /usr/local/bin/ws-ovpn
 
 cat > /etc/systemd/system/ws-ovpn.service << END
 [Unit]
@@ -196,8 +196,8 @@ clear
 
 # // 2. WEBSOCKET TLS (Port 443)
 echo -e "[ ${GREEN}INFO${NC} ] Setup WS-TLS..."
-wget -q -O /usr/bin/ws-tls "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-tls.sh"
-chmod +x /usr/bin/ws-tls
+wget -q -O /usr/local/bin/ws-tls "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-tls.sh"
+chmod +x /usr/local/bin/ws-tls
 
 cat > /etc/systemd/system/ws-tls.service << END
 [Unit]
