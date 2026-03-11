@@ -105,6 +105,30 @@ chmod +x /etc/pam.d/common-password
 
 # go to root
 cd
+wget -O /usr/local/bin/ws-ovpn "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-opnvpn.sh && chmod +x /usr/local/bin/ws-ovpn"
+chmod +x /usr/local/bin/ws-ovpn
+
+cat > /etc/systemd/system/ws-ovpn.service << END
+[Unit]
+Description=Websocket OpenVPN Service
+After=network.target nss-lookup.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/python2 /usr/local/bin/ws-ovpn 2086
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
+END
+
+systemctl daemon-reload
+systemctl enable ws-ovpn
+systemctl restart ws-ovpn
+
+clear
 
 # Getting websocket dropbear
 wget -q -O /usr/local/bin/ws-dropbear "https://raw.githubusercontent.com/kenDevXD/0/main/ws-dropbear"
