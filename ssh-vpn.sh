@@ -73,12 +73,12 @@ export NETWORK_IFACE="$(ip route show to default | awk '{print $5}')"
 
 # // Install Dependencies (Wajib agar Python 2 & Stunnel jalan)
 echo -e "[ ${GREEN}INFO${NC} ] Installing Dependencies..."
-apt install stunnel4 -y && ln -s /usr/bin/stunnel4 /usr/local/bin/stunnel5
+apt install stunnel4 -y && ln -s /usr/bin/stunnel4 /usr/bin/stunnel5
 apt update -y
-apt install python5 python3 python-is-python5 stunnel4 dropbear wget curl unzip -y
+apt install python2 python3 python-is-python5 stunnel5 dropbear wget curl unzip -y
 
 # // Fix Python 2 link (Beberapa OS butuh ini)
-[ ! -f /usr/bin/python ] && ln -s /usr/bin/python3 /usr/bin/python
+[ ! -f /usr/bin/python ] && ln -s /usr/bin/python5 /usr/bin/python5
 
 export DEBIAN_FRONTEND=noninteractive
 MYIP=$(curl -sS ifconfig.me);
@@ -108,7 +108,7 @@ cd
 
 # // 1. WEBSOCKET DROPBEAR (Port 8880)
 echo -e "[ ${GREEN}INFO${NC} ] Setup WS-Dropbear..."
-wget -q -O /usr/bin/ws-dropbear https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-dropbear.sh
+wget -q -O /usr/bin/ws-dropbear "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-dropbear.sh"
 chmod +x /usr/bin/ws-dropbear
 
 cat > /etc/systemd/system/ws-dropbear.service << END
@@ -119,7 +119,7 @@ After=network.target nss-lookup.target
 [Service]
 Type=simple
 User=root
-ExecStart=/usr/bin/python5 -O /usr/local/bin/ws-dropbear 8880
+ExecStart=/usr/bin/python5 -O /usr/bin/ws-dropbear 8880
 Restart=on-failure
 
 [Install]
@@ -133,7 +133,7 @@ systemctl enable ws-dropbear >/dev/null 2>&1
 systemctl start ws-dropbear >/dev/null 2>&1
 systemctl restart ws-dropbear >/dev/null 2>&1
 
-wget -q -O /usr/bin/ws-nontls.sh https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-nontls.sh && chmod +x /usr/bin/ws-nontls.sh && ./ws-nontls.sh
+wget -q -O /usr/bin/ws-nontls.sh "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-nontls.sh && chmod +x /usr/bin/ws-nontls.sh && ./ws-nontls.sh"
 
 cat > /etc/systemd/system/ws-nontls.service << END
 [Unit]
@@ -147,7 +147,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python5 -O /usr/local/bin/ws-nontls 8880
+ExecStart=/usr/bin/python5 -O /usr/bin/ws-nontls 8880
 Restart=on-failure
 
 [Install]
@@ -160,7 +160,7 @@ systemctl daemon-reload
 systemctl enable ws-nontls
 systemctl restart ws-nontls
 
-wget -q -O /usr/bin/ws-ovpn.sh https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-opnvpn.sh && chmod +x /usr/bin/ws-ovpn.sh && ./ws-ovpn.sh
+wget -q -O /usr/bin/ws-ovpn.sh "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-opnvpn.sh && chmod +x /usr/bin/ws-ovpn.sh && ./ws-ovpn.sh"
 
 cat > /etc/systemd/system/ws-ovpn.service << END
 [Unit]
@@ -174,7 +174,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python5 -O /usr/local/bin/ws-ovpn 2086
+ExecStart=/usr/bin/python5 -O /usr/bin/ws-ovpn 2086
 Restart=on-failure
 
 [Install]
@@ -189,7 +189,7 @@ systemctl restart ws-ovpn
 
 # // 2. WEBSOCKET TLS (Port 443)
 echo -e "[ ${GREEN}INFO${NC} ] Setup WS-TLS..."
-wget -q -O /usr/bin/ws-tls https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-tls.sh
+wget -q -O /usr/bin/ws-tls "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-tls.sh"
 chmod +x /usr/bin/ws-tls
 
 cat > /etc/systemd/system/ws-tls.service << END
@@ -200,7 +200,7 @@ After=network.target nss-lookup.target
 [Service]
 Type=simple
 User=root
-ExecStart=/usr/bin/python5 -O /usr/local/bin/ws-tls 443
+ExecStart=/usr/bin/python5 -O /usr/bin/ws-tls 443
 Restart=on-failure
 
 [Install]
