@@ -107,8 +107,8 @@ cd
 
 # // 1. WEBSOCKET DROPBEAR (Port 8880)
 echo -e "[ ${GREEN}INFO${NC} ] Setup WS-Dropbear..."
-wget -q -O /usr/local/bin/ws-dropbear https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-dropbear.sh
-chmod +x /usr/local/bin/ws-dropbear
+wget -q -O /usr/bin/ws-dropbear https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-dropbear.sh
+chmod +x /usr/bin/ws-dropbear
 
 cat > /etc/systemd/system/ws-dropbear.service << END
 [Unit]
@@ -139,7 +139,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-nontls 8880
+ExecStart=/usr/bin/python2 -O /usr/local/bin/ws-nontls 8880
 Restart=on-failure
 
 [Install]
@@ -165,7 +165,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-ovpn 2086
+ExecStart=/usr/bin/python2 -O /usr/local/bin/ws-ovpn 2086
 Restart=on-failure
 
 [Install]
@@ -177,7 +177,7 @@ systemctl restart ws-ovpn
 
 # // 2. WEBSOCKET TLS (Port 443)
 echo -e "[ ${GREEN}INFO${NC} ] Setup WS-TLS..."
-wget -q -O /usr/local/bin/ws-tls https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-tls.sh
+wget -q -O /usr/bin/ws-tls https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-tls.sh
 chmod +x /usr/local/bin/ws-tls
 
 cat > /etc/systemd/system/ws-tls.service << END
@@ -188,7 +188,7 @@ After=network.target nss-lookup.target
 [Service]
 Type=simple
 User=root
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-tls 443
+ExecStart=/usr/bin/python2 -O /usr/local/bin/ws-tls 443
 Restart=on-failure
 
 [Install]
