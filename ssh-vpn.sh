@@ -106,28 +106,39 @@ chmod +x /etc/pam.d/common-password
 # go to root
 cd
 
-# // 1. WEBSOCKET DROPBEAR (Port 8880)
-echo -e "[ ${GREEN}INFO${NC} ] Setup WS-Dropbear..."
-wget -q -O /usr/bin/ws-dropbear "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-dropbear.sh"
-chmod +x /usr/bin/ws-dropbear
+# Getting websocket dropbear
+wget -q -O /usr/local/bin/ws-dropbear "https://raw.githubusercontent.com/kenDevXD/0/main/ws-dropbear"
+chmod +x /usr/local/bin/ws-dropbear
 
-cat > /etc/default/dropbear << END
-NO_START=0
-DROPBEAR_PORT=143
-DROPBEAR_EXTRA_ARGS="-p 109 -p 110 -p 442"
-DROPBEAR_BANNER="/etc/issue.net"
-DROPBEAR_RECEIVE_WINDOW=65536
+# Installing Service
+cat > /etc/systemd/system/ws-dropbear.service << END
+[Unit]
+Description=Ssh Websocket By Akhir Zaman
+Documentation=https://xnxx.com
+After=network.target nss-lookup.target
+
+[Service]
+Type=simple
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=/usr/bin/python2 -O /usr/local/bin/ws-dropbear 8880
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
 END
-
-clear
 
 systemctl daemon-reload >/dev/null 2>&1
 systemctl enable ws-dropbear >/dev/null 2>&1
 systemctl start ws-dropbear >/dev/null 2>&1
 systemctl restart ws-dropbear >/dev/null 2>&1
 
-wget -q -O /usr/bin/ws-nontls.sh "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-nontls.sh && chmod +x /usr/bin/ws-nontls.sh && ./ws-nontls.sh"
+clear
 
+wget -q -O /usr/bin/ws-nontls.sh "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-nontls.sh && chmod +x /usr/bin/ws-nontls.sh && ./ws-nontls.sh"
+chmod +x /usr/bin/ws-nontls
 cat > /etc/systemd/system/ws-nontls.service << END
 [Unit]
 Description=Python Proxy Mod By geovpn
@@ -147,13 +158,15 @@ Restart=on-failure
 WantedBy=multi-user.target
 END
 
+systemctl daemon-reload >/dev/null 2>&1
+systemctl enable ws-nontls >/dev/null 2>&1
+systemctl start ws-nontls >/dev/null 2>&1
+systemctl restart ws-nontls >/dev/null 2>&1
+
 clear
 
-systemctl daemon-reload
-systemctl enable ws-nontls
-systemctl restart ws-nontls
-
 wget -q -O /usr/bin/ws-ovpn.sh "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-opnvpn.sh && chmod +x /usr/bin/ws-ovpn.sh && ./ws-ovpn.sh"
+chmod +x /usr/bin/ws-ovpn
 
 cat > /etc/systemd/system/ws-ovpn.service << END
 [Unit]
@@ -174,11 +187,12 @@ Restart=on-failure
 WantedBy=multi-user.target
 END
 
-clear
+systemctl daemon-reload >/dev/null 2>&1
+systemctl enable ws-ovpn >/dev/null 2>&1
+systemctl start ws-ovpn >/dev/null 2>&1
+systemctl restart ws-ovpn >/dev/null 2>&1
 
-systemctl daemon-reload
-systemctl enable ws-ovpn
-systemctl restart ws-ovpn
+clear
 
 # // 2. WEBSOCKET TLS (Port 443)
 echo -e "[ ${GREEN}INFO${NC} ] Setup WS-TLS..."
@@ -200,53 +214,41 @@ Restart=on-failure
 WantedBy=multi-user.target
 END
 
+systemctl daemon-reload >/dev/null 2>&1
+systemctl enable ws-tls >/dev/null 2>&1
+systemctl start ws-tls >/dev/null 2>&1
+systemctl restart ws-tls >/dev/null 2>&1
+
 clear
 
-systemctl daemon-reload
-systemctl enable ws-tls
-systemctl restart ws-tls
+# Getting websocket ssl stunnel
+wget -q -O /usr/local/bin/ws-stunnel "https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/ws-stunnel"
+chmod +x /usr/local/bin/ws-stunnel
 
+# Installing Service Ovpn Websocket
+cat > /etc/systemd/system/ws-stunnel.service << END
+[Unit]
+Description=Ovpn Websocket By Akhir Zaman
+Documentation=https://xnxx.com
+After=network.target nss-lookup.target
 
-# // 3. STUNNEL SETUP (Sertifikat & Config)
-echo -e "[ ${GREEN}INFO${NC} ] Setup Stunnel5..."
-mkdir -p /etc/stunnel5
-# Buat Sertifikat Mandiri (Self-Signed) agar tidak error saat Stunnel jalan
-openssl req -new -x509 -days 3650 -nodes -newkey rsa:2048 \
--keyout /etc/stunnel5/stunnel.key -out /etc/stunnel5/stunnel.crt \
--subj "/C=ID/ST=Indonesia/L=Indonesia/O=Aixxy/OU=Admin/CN=aixxy.codes"
-cat /etc/stunnel2/stunnel.key /etc/stunnel2/stunnel.crt > /etc/stunnel4/stunnel.pem
+[Service]
+Type=simple
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=/usr/bin/python2 -O /usr/local/bin/ws-stunnel
+Restart=on-failure
 
-cat > /etc/stunnel/stunnel.conf << END
-cert = /etc/stunnel/stunnel.pem
-client = no
-socket = a:SO_REUSEADDR=1
-socket = l:TCP_NODELAY=1
-socket = r:TCP_NODELAY=1
-
-[openssh]
-accept = 443
-connect = 127.0.0.1:109
-
-[dropbear]
-accept = 447
-connect = 127.0.0.1:143
-
-[stunnel5]
-accept = 442
-connect = 127.0.0.1:1194
+[Install]
+WantedBy=multi-user.target
 END
 
-# // 4. DROPBEAR CONFIGURATION
-echo -e "[ ${GREEN}INFO${NC} ] Configuring Dropbear..."
-sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=143/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 109"/g' /etc/default/dropbear
-
-# // RESTART ALL SERVICES
-echo -e "[ ${GREEN}INFO${NC} ] Starting All Services..."
-systemctl daemon-reload
-systemctl enable ws-dropbear ws-tls stunnel5 dropbear
-systemctl restart ws-dropbear ws-tls stunnel5 dropbear
+systemctl daemon-reload >/dev/null 2>&1
+systemctl enable ws-stunnel >/dev/null 2>&1
+systemctl start ws-stunnel >/dev/null 2>&1
+systemctl restart ws-stunnel >/dev/null 2>&1
 
 clear
 
@@ -287,7 +289,6 @@ sleep 1
 echo -e "[ ${green}INFO$NC ] Enable system rc local"
 systemctl enable rc-local >/dev/null 2>&1
 systemctl start rc-local.service >/dev/null 2>&1
-
 # disable ipv6
 sleep 1
 echo -e "[ ${green}INFO$NC ] Disable ipv6"
@@ -378,7 +379,6 @@ chmod +x configure
 make
 make install
 cd /root
-rm -r -f stunnel
 rm -f stunnel5.zip
 rm -fr /etc/stunnel5
 mkdir -p /etc/stunnel5
@@ -448,9 +448,6 @@ cp -r /usr/local/bin/stunnel /usr/local/bin/stunnel5
 mv /usr/local/bin/stunnel /usr/local/bin/stunnel5
 
 # Remove File
-rm -r -f /usr/local/share/doc/stunnel/
-rm -r -f /usr/local/etc/stunnel/
-rm -f /usr/local/bin/stunnel
 rm -f /usr/local/bin/stunnel3
 rm -f /usr/local/bin/stunnel4
 #rm -f /usr/local/bin/stunnel5
