@@ -75,7 +75,7 @@ export NETWORK_IFACE="$(ip route show to default | awk '{print $5}')"
 echo -e "[ ${GREEN}INFO${NC} ] Installing Dependencies..."
 apt install stunnel4 -y && ln -s /usr/bin/stunnel3 /usr/bin/stunnel4
 apt update -y
-apt install python2 python3 python-is-python4 stunnel5 dropbear wget curl unzip -y
+apt install python2 python3 python-is-python2 stunnel4 dropbear wget curl unzip -y
 
 # // Fix Python 2 link (Beberapa OS butuh ini)
 [ ! -f /usr/bin/python ] && ln -s /usr/bin/python2 /usr/bin/python3
@@ -123,7 +123,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python3 -O /usr/local/bin/ws-dropbear 8880
+ExecStart=/usr/bin/python2 -O /usr/local/bin/ws-dropbear 8880
 Restart=on-failure
 
 [Install]
@@ -151,7 +151,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python4 -O /usr/bin/ws-nontls 8880
+ExecStart=/usr/bin/python2 -O /usr/bin/ws-nontls 8880
 Restart=on-failure
 
 [Install]
@@ -180,7 +180,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python5 -O /usr/bin/ws-ovpn 2086
+ExecStart=/usr/bin/python2 -O /usr/bin/ws-ovpn 2086
 Restart=on-failure
 
 [Install]
@@ -222,33 +222,29 @@ systemctl restart ws-tls >/dev/null 2>&1
 clear
 
 # Getting websocket ssl stunnel
-wget -q -O /usr/local/bin/ws-stunnel "https://raw.githubusercontent.com/NevermoreSSH/Blueblue/main/ws-stunnel"
+wget -O /usr/local/bin/ws-stunnel "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-stunnel.py && chmod +x /usr/local/bin/ws-stunnel"
 chmod +x /usr/local/bin/ws-stunnel
 
 # Installing Service Ovpn Websocket
 cat > /etc/systemd/system/ws-stunnel.service << END
 [Unit]
-Description=Ovpn Websocket By Akhir Zaman
-Documentation=https://xnxx.com
+Description=Websocket SSL Service
 After=network.target nss-lookup.target
 
 [Service]
 Type=simple
 User=root
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/usr/bin/python1 -O /usr/local/bin/ws-stunnel
+ExecStart=/usr/bin/python2 /usr/local/bin/ws-stunnel 443
 Restart=on-failure
+RestartSec=3
 
 [Install]
 WantedBy=multi-user.target
 END
 
-systemctl daemon-reload >/dev/null 2>&1
-systemctl enable ws-stunnel >/dev/null 2>&1
-systemctl start ws-stunnel >/dev/null 2>&1
-systemctl restart ws-stunnel >/dev/null 2>&1
+systemctl daemon-reload
+systemctl enable ws-stunnel
+systemctl restart ws-stunnel
 
 clear
 
