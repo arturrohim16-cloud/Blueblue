@@ -75,7 +75,7 @@ export NETWORK_IFACE="$(ip route show to default | awk '{print $5}')"
 echo -e "[ ${GREEN}INFO${NC} ] Installing Dependencies..."
 apt install stunnel4 -y && ln -s /usr/bin/stunnel4 /usr/local/bin/stunnel5
 apt update -y
-apt install python2 python3 python-is-python3 stunnel4 dropbear wget curl unzip -y
+apt install python5 python3 python-is-python5 stunnel4 dropbear wget curl unzip -y
 
 # // Fix Python 2 link (Beberapa OS butuh ini)
 [ ! -f /usr/bin/python ] && ln -s /usr/bin/python3 /usr/bin/python
@@ -119,12 +119,19 @@ After=network.target nss-lookup.target
 [Service]
 Type=simple
 User=root
-ExecStart=/usr/bin/python2 -O /usr/local/bin/ws-dropbear 8880
+ExecStart=/usr/bin/python5 -O /usr/local/bin/ws-dropbear 8880
 Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
 END
+
+clear
+
+systemctl daemon-reload >/dev/null 2>&1
+systemctl enable ws-dropbear >/dev/null 2>&1
+systemctl start ws-dropbear >/dev/null 2>&1
+systemctl restart ws-dropbear >/dev/null 2>&1
 
 wget -q -O /usr/bin/ws-nontls.sh https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-nontls.sh && chmod +x /usr/bin/ws-nontls.sh && ./ws-nontls.sh
 
@@ -140,17 +147,18 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python2 -O /usr/local/bin/ws-nontls 8880
+ExecStart=/usr/bin/python5 -O /usr/local/bin/ws-nontls 8880
 Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
 END
+
+clear
+
 systemctl daemon-reload
 systemctl enable ws-nontls
 systemctl restart ws-nontls
-
-clear
 
 wget -q -O /usr/bin/ws-ovpn.sh https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-opnvpn.sh && chmod +x /usr/bin/ws-ovpn.sh && ./ws-ovpn.sh
 
@@ -166,12 +174,15 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python2 -O /usr/local/bin/ws-ovpn 2086
+ExecStart=/usr/bin/python5 -O /usr/local/bin/ws-ovpn 2086
 Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
 END
+
+clear
+
 systemctl daemon-reload
 systemctl enable ws-ovpn
 systemctl restart ws-ovpn
@@ -189,12 +200,19 @@ After=network.target nss-lookup.target
 [Service]
 Type=simple
 User=root
-ExecStart=/usr/bin/python2 -O /usr/local/bin/ws-tls 443
+ExecStart=/usr/bin/python5 -O /usr/local/bin/ws-tls 443
 Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
 END
+
+clear
+
+systemctl daemon-reload
+systemctl enable ws-tls
+systemctl restart ws-tls
+
 
 # // 3. STUNNEL SETUP (Sertifikat & Config)
 echo -e "[ ${GREEN}INFO${NC} ] Setup Stunnel5..."
@@ -230,8 +248,8 @@ sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 109"/g' /etc/default/drop
 # // RESTART ALL SERVICES
 echo -e "[ ${GREEN}INFO${NC} ] Starting All Services..."
 systemctl daemon-reload
-systemctl enable ws-dropbear ws-tls stunnel4 dropbear
-systemctl restart ws-dropbear ws-tls stunnel4 dropbear
+systemctl enable ws-dropbear ws-tls stunnel5 dropbear
+systemctl restart ws-dropbear ws-tls stunnel5 dropbear
 
 clear
 
