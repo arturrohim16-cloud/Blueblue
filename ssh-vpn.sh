@@ -73,12 +73,12 @@ export NETWORK_IFACE="$(ip route show to default | awk '{print $5}')"
 
 # // Install Dependencies (Wajib agar Python 2 & Stunnel jalan)
 echo -e "[ ${GREEN}INFO${NC} ] Installing Dependencies..."
-apt install stunnel4 -y && ln -s /usr/bin/stunnel4 /usr/bin/stunnel5
+apt install stunnel4 -y && ln -s /usr/bin/stunnel3 /usr/bin/stunnel4
 apt update -y
 apt install python2 python3 python-is-python5 stunnel5 dropbear wget curl unzip -y
 
 # // Fix Python 2 link (Beberapa OS butuh ini)
-[ ! -f /usr/bin/python ] && ln -s /usr/bin/python5 /usr/bin/python5
+[ ! -f /usr/bin/python ] && ln -s /usr/bin/python2 /usr/bin/python3
 
 export DEBIAN_FRONTEND=noninteractive
 MYIP=$(curl -sS ifconfig.me);
@@ -214,9 +214,9 @@ mkdir -p /etc/stunnel5
 openssl req -new -x509 -days 3650 -nodes -newkey rsa:2048 \
 -keyout /etc/stunnel5/stunnel.key -out /etc/stunnel5/stunnel.crt \
 -subj "/C=ID/ST=Indonesia/L=Indonesia/O=Aixxy/OU=Admin/CN=aixxy.codes"
-cat /etc/stunnel5/stunnel.key /etc/stunnel5/stunnel.crt > /etc/stunnel5/stunnel.pem
+cat /etc/stunnel2/stunnel.key /etc/stunnel2/stunnel.crt > /etc/stunnel4/stunnel.pem
 
-cat > /etc/stunnel5/stunnel5.conf << END
+cat > /etc/stunnel5/stunnel4.conf << END
 cert = /etc/stunnel5/stunnel.pem
 client = no
 socket = a:SO_REUSEADDR=1
