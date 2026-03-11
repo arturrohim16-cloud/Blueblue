@@ -216,20 +216,24 @@ openssl req -new -x509 -days 3650 -nodes -newkey rsa:2048 \
 -subj "/C=ID/ST=Indonesia/L=Indonesia/O=Aixxy/OU=Admin/CN=aixxy.codes"
 cat /etc/stunnel2/stunnel.key /etc/stunnel2/stunnel.crt > /etc/stunnel4/stunnel.pem
 
-cat > /etc/stunnel5/stunnel4.conf << END
-cert = /etc/stunnel5/stunnel.pem
+cat > /etc/stunnel/stunnel.conf << END
+cert = /etc/stunnel/stunnel.pem
 client = no
 socket = a:SO_REUSEADDR=1
 socket = l:TCP_NODELAY=1
 socket = r:TCP_NODELAY=1
 
-[dropbear]
-accept = 447
+[openssh]
+accept = 443
 connect = 127.0.0.1:109
 
-[openssh]
-accept = 777
-connect = 127.0.0.1:22
+[dropbear]
+accept = 447
+connect = 127.0.0.1:143
+
+[stunnel5]
+accept = 442
+connect = 127.0.0.1:1194
 END
 
 # // 4. DROPBEAR CONFIGURATION
