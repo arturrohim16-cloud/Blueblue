@@ -111,19 +111,12 @@ echo -e "[ ${GREEN}INFO${NC} ] Setup WS-Dropbear..."
 wget -q -O /usr/bin/ws-dropbear "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-dropbear.sh"
 chmod +x /usr/bin/ws-dropbear
 
-cat > /etc/systemd/system/ws-dropbear.service << END
-[Unit]
-Description=SSH Websocket By Akhir Zaman
-After=network.target nss-lookup.target
-
-[Service]
-Type=simple
-User=root
-ExecStart=/usr/bin/python5 -O /usr/bin/ws-dropbear 8880
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
+cat > /etc/default/dropbear << END
+NO_START=0
+DROPBEAR_PORT=143
+DROPBEAR_EXTRA_ARGS="-p 109 -p 110 -p 442"
+DROPBEAR_BANNER="/etc/issue.net"
+DROPBEAR_RECEIVE_WINDOW=65536
 END
 
 clear
