@@ -82,6 +82,7 @@ echo -e "${GREEN}Starting Installation............${NC}"
 # // Go To Root Directory
 cd /root/
 # // Remove
+apt install python2 -y
 apt-get remove --purge nginx* -y
 apt-get remove --purge nginx-common* -y
 apt-get remove --purge nginx-full* -y
