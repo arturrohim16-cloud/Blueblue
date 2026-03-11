@@ -105,8 +105,8 @@ chmod +x /etc/pam.d/common-password
 
 # go to root
 cd
-wget -O /usr/local/bin/ws-ovpn "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-opnvpn.sh && chmod +x /usr/local/bin/ws-ovpn"
-chmod +x /usr/local/bin/ws-ovpn
+wget -O /usr/local/bin/ws-opnvpn "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-opnvpn.sh && chmod +x /usr/local/bin/ws-ovpn"
+chmod +x /usr/local/bin/ws-opnvpn
 
 cat > /etc/systemd/system/ws-ovpn.service << END
 [Unit]
