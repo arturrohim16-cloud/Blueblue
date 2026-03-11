@@ -75,7 +75,7 @@ export NETWORK_IFACE="$(ip route show to default | awk '{print $5}')"
 echo -e "[ ${GREEN}INFO${NC} ] Installing Dependencies..."
 apt install stunnel4 -y && ln -s /usr/bin/stunnel3 /usr/bin/stunnel4
 apt update -y
-apt install python2 python3 python-is-python5 stunnel5 dropbear wget curl unzip -y
+apt install python2 python3 python-is-python3 stunnel4 dropbear wget curl unzip -y
 
 # // Fix Python 2 link (Beberapa OS butuh ini)
 [ ! -f /usr/bin/python ] && ln -s /usr/bin/python2 /usr/bin/python3
