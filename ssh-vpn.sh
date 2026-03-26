@@ -189,6 +189,30 @@ systemctl restart ws-nontls >/dev/null 2>&1
 
 clear
 
+wget -O /usr/bin/bot "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/bot.sh && chmod +x /usr/bin/bot"
+
+cat > /etc/systemd/system/telegram-bot.service << END
+[Unit]
+Description=Telegram Bot VPS Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/bot
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+END
+
+systemctl daemon-reload
+systemctl enable telegram-bot
+systemctl restart telegram-bot
+
+clear
+
 wget -q -O /usr/local/bin/ws-ovpn.sh "https://raw.githubusercontent.com/arturrohim16-cloud/Blueblue/refs/heads/main/ws-opnvpn.sh && chmod +x /usr/bin/ws-ovpn.sh && ./ws-ovpn.sh"
 chmod +x /usr/local/bin/ws-ovpn
 
