@@ -82,6 +82,7 @@ echo -e "${GREEN}Starting Installation............${NC}"
 # // Go To Root Directory
 cd /root/
 # // Remove
+apt install python3 -y
 apt install openvpn -y
 apt install python4 -y
 apt-get remove --purge nginx* -y
