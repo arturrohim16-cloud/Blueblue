@@ -75,10 +75,10 @@ export NETWORK_IFACE="$(ip route show to default | awk '{print $5}')"
 echo -e "[ ${GREEN}INFO${NC} ] Installing Dependencies..."
 apt install stunnel4 -y && ln -s /usr/bin/stunnel3 /usr/bin/stunnel4
 apt update -y
-apt install python2 python3 python-is-python2 stunnel4 dropbear wget curl unzip -y
+apt install python3 -y
 
 # // Fix Python 2 link (Beberapa OS butuh ini)
-[ ! -f /usr/bin/python ] && ln -s /usr/bin/python2 /usr/bin/python3
+[ ! -f /usr/bin/python ] && ln -s /usr/bin/python3 /usr/bin/python3
 
 export DEBIAN_FRONTEND=noninteractive
 MYIP=$(curl -sS ifconfig.me);
@@ -116,7 +116,7 @@ After=network.target nss-lookup.target
 [Service]
 Type=simple
 User=root
-ExecStart=/usr/bin/python3 /usr/local/bin/ws-ovpn 2086
+ExecStart=/usr/bin/python3 -O /usr/local/bin/ws-ovpn 2086
 Restart=on-failure
 RestartSec=3
 
@@ -282,7 +282,7 @@ After=network.target nss-lookup.target
 [Service]
 Type=simple
 User=root
-ExecStart=/usr/bin/python3 /usr/local/bin/ws-stunnel 443
+ExecStart=/usr/bin/python3 -O /usr/local/bin/ws-stunnel 443
 Restart=on-failure
 RestartSec=3
 
