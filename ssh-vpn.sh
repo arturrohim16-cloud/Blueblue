@@ -116,7 +116,7 @@ After=network.target nss-lookup.target
 [Service]
 Type=simple
 User=root
-ExecStart=/usr/bin/python2 /usr/local/bin/ws-ovpn 2086
+ExecStart=/usr/bin/python3 /usr/local/bin/ws-ovpn 2086
 Restart=on-failure
 RestartSec=3
 
@@ -147,7 +147,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python2 -O /usr/local/bin/ws-dropbear 8880
+ExecStart=/usr/bin/python3 -O /usr/local/bin/ws-dropbear 8880
 Restart=on-failure
 
 [Install]
@@ -175,7 +175,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python2 -O /usr/bin/ws-nontls 8880
+ExecStart=/usr/bin/python3 -O /usr/bin/ws-nontls 8880
 Restart=on-failure
 
 [Install]
@@ -228,7 +228,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python2 -O /usr/bin/ws-ovpn 2086
+ExecStart=/usr/bin/python3 -O /usr/bin/ws-ovpn 2086
 Restart=on-failure
 
 [Install]
@@ -255,7 +255,7 @@ After=network.target nss-lookup.target
 [Service]
 Type=simple
 User=root
-ExecStart=/usr/bin/python2 -O /usr/bin/ws-tls 443
+ExecStart=/usr/bin/python3 -O /usr/bin/ws-tls 443
 Restart=on-failure
 
 [Install]
@@ -282,7 +282,7 @@ After=network.target nss-lookup.target
 [Service]
 Type=simple
 User=root
-ExecStart=/usr/bin/python2 /usr/local/bin/ws-stunnel 443
+ExecStart=/usr/bin/python3 /usr/local/bin/ws-stunnel 443
 Restart=on-failure
 RestartSec=3
 
