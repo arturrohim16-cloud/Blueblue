@@ -73,16 +73,8 @@ export NETWORK_IFACE="$(ip route show to default | awk '{print $5}')"
 
 # // Install Dependencies (Wajib agar Python 2 & Stunnel jalan)
 echo -e "[ ${GREEN}INFO${NC} ] Installing Dependencies..."
-apt install stunnel4 -y && ln -s /usr/bin/stunnel4 /usr/bin/stunnel4
-# Update gudang aplikasi
-apt update && apt upgrade -y
-
-# Install Python 3 dan perangkat pendukungnya
-apt install python3 python3-pip python3-dev python3-venv -y
-
-# Menghubungkan perintah 'python' ke 'python3'
-apt install python-is-python3 -y
-
+apt update -y && apt upgrade -y
+apt install nginx xray jq python3 python3-pip curl wget screen stunnel4 dropbear socat dbus-x11 -y
 # Atau cara manual:
 ln -sf /usr/bin/python3 /usr/bin/python
 
