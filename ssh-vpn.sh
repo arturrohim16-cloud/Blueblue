@@ -80,8 +80,11 @@ apt update && apt upgrade -y
 # Install Python 3 dan perangkat pendukungnya
 apt install python3 python3-pip python3-dev python3-venv -y
 
-# // Fix Python 2 link (Beberapa OS butuh ini)
-[ ! -f /usr/bin/python ] && ln -s /usr/bin/python3 /usr/bin/python3
+# Menghubungkan perintah 'python' ke 'python3'
+apt install python-is-python3 -y
+
+# Atau cara manual:
+ln -sf /usr/bin/python3 /usr/bin/python
 
 export DEBIAN_FRONTEND=noninteractive
 MYIP=$(curl -sS ifconfig.me);
